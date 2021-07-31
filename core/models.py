@@ -1,7 +1,20 @@
 from django.db import models
+from django.utils import timezone
 
-
-# Create your models here.
 
 class BaseModel(models.Model):
-    pass
+    class Meta:
+        abstract = True
+
+
+class TimestampMixin(BaseModel):
+    class Meta:
+        abstract = True
+
+    Create_timestamp = models.DateTimeField(auto_now_add=True)
+    Modify_timestamp = models.DateTimeField(auto_now=True)
+    Delete_timestamp = models.DateTimeField(default=None, null=True, blank=True)
+
+    def logical_delete(self):
+        self.Delete_timestamp = timezone.now()
+        self.save()
