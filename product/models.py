@@ -35,10 +35,14 @@ class Discount(BaseModel):
                                  null=False,
                                  blank=False,
                                  )
-
-    unit = models.CharField(verbose_name=_("unit:"),
+    unit_choices = [
+        ('rial', 'rial'),
+        ('percent', 'percent')
+    ]
+    unit = models.CharField(max_length=7,
+                            verbose_name=_("unit:"),
                             help_text=_("choice unit of discount"),
-                            choices=[_('rial'), _('percent')],
+                            choices=unit_choices,
                             null=False,
                             blank=False)
 
