@@ -129,3 +129,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'my_login'
 
+LOCALE_PATHS = [BASE_DIR / 'locale']
