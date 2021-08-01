@@ -1,6 +1,7 @@
 from core.models import *
 from django.utils.translation import gettext_lazy as _
 from product.validators import *
+from django.core.exceptions import ValidationError
 
 
 class Price(TimestampMixin):
