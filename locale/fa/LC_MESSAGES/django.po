@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-31 19:31+0430\n"
+"POT-Creation-Date: 2021-07-31 22:16+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,99 +20,117 @@ msgstr ""
 
 #: .\product\models.py:7
 msgid "price"
-msgstr ""
+msgstr "قیمت"
 
 #: .\product\models.py:9 .\product\models.py:33
 msgid "amount:"
-msgstr ""
+msgstr "مقدار:"
 
 #: .\product\models.py:10
 msgid "The number you want to price"
-msgstr ""
+msgstr "تعدادی که می خواهید قیمت گذاری کنید وارد کنید(اختیاری)"
 
 #: .\product\models.py:14
 msgid "Enter price:"
-msgstr ""
+msgstr "قیمت را وارد کنید:"
 
 #: .\product\models.py:15
-msgid "price of item"
-msgstr ""
+msgid "price of product"
+msgstr "قیمت محصول"
 
 #: .\product\models.py:25
 msgid "discount"
-msgstr ""
+msgstr "تخفیف"
 
-#: .\product\models.py:28 .\product\models.py:63
+#: .\product\models.py:28 .\product\models.py:84
 msgid "name:"
-msgstr ""
+msgstr "نام:"
 
 #: .\product\models.py:29
 msgid "name of discount"
-msgstr ""
+msgstr "یک نام برای تخفیف انتخاب کنید بعنوان مثال(تخفیف تابستانه)"
 
 #: .\product\models.py:34
 msgid "amount of discount"
-msgstr ""
+msgstr "مقدار تخفیف"
 
 #: .\product\models.py:43
 msgid "unit:"
-msgstr ""
+msgstr "واحد:"
 
 #: .\product\models.py:44
 msgid "choice unit of discount"
-msgstr ""
+msgstr "واحد تخفیف را انتخاب کنید"
 
 #: .\product\models.py:55
 msgid "category"
-msgstr ""
+msgstr "گروه"
 
-#: .\product\models.py:60
-msgid "product"
-msgstr ""
+#: .\product\models.py:58
+msgid "Enter name:"
+msgstr "نام را وارد کنید:"
+
+#: .\product\models.py:59
+msgid "name of category"
+msgstr "نام دسته"
+
+#: .\product\models.py:63
+msgid "description:"
+msgstr "توضیحات:"
 
 #: .\product\models.py:64
-msgid "Enter name of product"
-msgstr ""
+msgid "add description for category"
+msgstr "توضیحاتی برای دسته اضافه کنید"
 
-#: .\product\models.py:67
-msgid "Brand:"
-msgstr ""
-
-#: .\product\models.py:68
-msgid "Enter name of manufacturer"
-msgstr ""
-
-#: .\product\models.py:72
-msgid "price:"
-msgstr ""
-
-#: .\product\models.py:73
-msgid "choose price"
-msgstr ""
-
-#: .\product\models.py:77
-msgid "discount:"
-msgstr ""
-
-#: .\product\models.py:78
-msgid "choose discount"
-msgstr ""
-
-#: .\product\models.py:82
+#: .\product\models.py:70 .\product\models.py:103
 msgid "category:"
-msgstr ""
+msgstr "دسته:"
 
-#: .\product\models.py:83
+#: .\product\models.py:71 .\product\models.py:104
 msgid "choose category"
-msgstr ""
+msgstr "دسته را انتخاب کنید"
+
+#: .\product\models.py:81
+msgid "product"
+msgstr "محصول"
 
 #: .\product\models.py:85
-msgid "Inventory"
-msgstr ""
+msgid "Enter name of product"
+msgstr "نام محصول را انتخاب کنید"
 
-#: .\product\models.py:86
+#: .\product\models.py:88
+msgid "Brand:"
+msgstr "برند:"
+
+#: .\product\models.py:89
+msgid "Enter name of manufacturer"
+msgstr "نام سازنده محصول را وارد کنید"
+
+#: .\product\models.py:93
+msgid "price:"
+msgstr "قیمت:"
+
+#: .\product\models.py:94
+msgid "choose price"
+msgstr "قیمت را انتخاب کنید"
+
+#: .\product\models.py:98
+msgid "discount:"
+msgstr "تخفیف:"
+
+#: .\product\models.py:99
+msgid "choose discount"
+msgstr "تخفیف را انتخاب کنید"
+
+#: .\product\models.py:106
+#, fuzzy
+#| msgid "Inventory"
+msgid "Inventory:"
+msgstr "موجودی"
+
+#: .\product\models.py:107
 msgid "Inventory of product"
-msgstr ""
+msgstr "موجودی محصول در انبار"
 
 #: .\venv\Lib\site-packages\django\contrib\messages\apps.py:7
 msgid "Messages"

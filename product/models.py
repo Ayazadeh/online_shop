@@ -2,7 +2,7 @@ from core.models import *
 from django.utils.translation import gettext_lazy as _
 
 
-class Price(BaseModel):
+class Price(TimestampMixin):
     class Meta:
         verbose_name = _("price")
 
@@ -12,7 +12,7 @@ class Price(BaseModel):
                                          blank=True)
 
     price = models.PositiveIntegerField(verbose_name=_("Enter price:"),
-                                        help_text=_("price of item"),
+                                        help_text=_("price of product"),
                                         null=False,
                                         blank=False)
 
@@ -20,15 +20,15 @@ class Price(BaseModel):
         return f'{self.id}# {self.amount}: {self.price}'
 
 
-class Discount(BaseModel):
+class Discount(TimestampMixin):
     class Meta:
         verbose_name = _("discount")
 
-    name = models.CharField(max_length=100,
-                            verbose_name=_("name:"),
-                            help_text=_("name of discount"),
-                            null=True,
-                            blank=True)
+    discount_name = models.CharField(max_length=100,
+                                     verbose_name=_("name:"),
+                                     help_text=_("name of discount"),
+                                     null=True,
+                                     blank=True)
 
     amount = models.IntegerField(verbose_name=_("amount:"),
                                  help_text=_("amount of discount"),
@@ -47,21 +47,43 @@ class Discount(BaseModel):
                             blank=False)
 
     def __str__(self):
-        return f"{self.id}# {self.name}: {self.amount} {self.unit}"
+        return f"{self.id}# {self.discount_name}: {self.amount} {self.unit}"
 
 
-class Category(BaseModel):
+class Category(TimestampMixin):
     class Meta:
         verbose_name = _("category")
 
+    category_name = models.CharField(max_length=50,
+                                     verbose_name=_("Enter name:"),
+                                     help_text=_("name of category"),
+                                     )
 
-class Product(BaseModel):
+    description = models.TextField(max_length=200,
+                                   verbose_name=_("description:"),
+                                   help_text=_("add description for category"),
+                                   null=True,
+                                   blank=True)
+
+    parent = models.ForeignKey('self',
+                               on_delete=models.CASCADE,
+                               verbose_name=_("category:"),
+                               help_text=_("choose category"),
+                               null=True,
+                               blank=True,
+                               )
+
+    def __str__(self):
+        return f'{self.id}# {self.category_name}'
+
+
+class Product(TimestampMixin):
     class Meta:
         verbose_name = _("product")
 
-    name = models.CharField(max_length=100,
-                            verbose_name=_("name:"),
-                            help_text=_("Enter name of product"))
+    product_name = models.CharField(max_length=100,
+                                    verbose_name=_("name:"),
+                                    help_text=_("Enter name of product"))
 
     brand = models.CharField(max_length=100,
                              verbose_name=_("Brand:"),
@@ -82,5 +104,8 @@ class Product(BaseModel):
                                  verbose_name=_("category:"),
                                  help_text=_("choose category"))
 
-    Inventory = models.IntegerField(verbose_name=_("Inventory"),
+    Inventory = models.IntegerField(verbose_name=_("Inventory:"),
                                     help_text=_("Inventory of product"))
+
+    def __str__(self):
+        return f'{self.id}# {self.product_name}'
