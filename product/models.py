@@ -59,12 +59,6 @@ class Category(TimestampMixin):
                                      help_text=_("name of category"),
                                      )
 
-    description = models.TextField(max_length=200,
-                                   verbose_name=_("description:"),
-                                   help_text=_("add description for category"),
-                                   null=True,
-                                   blank=True)
-
     parent = models.ForeignKey('self',
                                on_delete=models.CASCADE,
                                verbose_name=_("category:"),
@@ -75,6 +69,15 @@ class Category(TimestampMixin):
 
     def __str__(self):
         return f'{self.id}# {self.category_name}'
+
+
+def validate_file_extension(value):
+    import os
+    from django.core.exceptions import ValidationError
+    ext = os.path.splitext(value.name)[1]
+    valid_extensions = ['.jpg', '.png']
+    if not ext.lower() in valid_extensions:
+        raise ValidationError('Unsupported file extension.')
 
 
 class Product(TimestampMixin):
@@ -97,7 +100,9 @@ class Product(TimestampMixin):
     discount = models.ForeignKey(Discount,
                                  on_delete=models.CASCADE,
                                  verbose_name=_("discount:"),
-                                 help_text=_("choose discount"))
+                                 help_text=_("choose discount"),
+                                 null=True,
+                                 blank=True)
 
     Category = models.ForeignKey(Category,
                                  on_delete=models.CASCADE,
@@ -106,6 +111,11 @@ class Product(TimestampMixin):
 
     Inventory = models.IntegerField(verbose_name=_("Inventory:"),
                                     help_text=_("Inventory of product"))
+
+    product_image = models.FileField(upload_to='product_image/',
+                                     null=False,
+                                     blank=False,
+                                     validators=[validate_file_extension])
 
     def __str__(self):
         return f'{self.id}# {self.product_name}'
