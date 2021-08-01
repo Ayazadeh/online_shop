@@ -1,5 +1,6 @@
 from core.models import *
 from django.utils.translation import gettext_lazy as _
+from product.validators import *
 
 
 class Price(TimestampMixin):
@@ -30,11 +31,11 @@ class Discount(TimestampMixin):
                                      null=True,
                                      blank=True)
 
-    amount = models.IntegerField(verbose_name=_("amount:"),
-                                 help_text=_("amount of discount"),
-                                 null=False,
-                                 blank=False,
-                                 )
+    amount = models.PositiveIntegerField(verbose_name=_("amount:"),
+                                         help_text=_("amount of discount"),
+                                         null=False,
+                                         blank=False,
+                                         )
     description = models.CharField(max_length=300,
                                    verbose_name=_("description"),
                                    help_text=_("description for discount"),
@@ -67,23 +68,14 @@ class Category(TimestampMixin):
 
     parent = models.ForeignKey('self',
                                on_delete=models.CASCADE,
-                               verbose_name=_("category:"),
-                               help_text=_("choose category"),
+                               verbose_name=_("parent:"),
+                               help_text=_("choose parent for category"),
                                null=True,
                                blank=True,
                                )
 
     def __str__(self):
         return f'{self.category_name}'
-
-
-def validate_file_extension(value):
-    import os
-    from django.core.exceptions import ValidationError
-    ext = os.path.splitext(value.name)[1]
-    valid_extensions = ['.jpg', '.png']
-    if not ext.lower() in valid_extensions:
-        raise ValidationError('Unsupported file extension.')
 
 
 class Product(TimestampMixin):
