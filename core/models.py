@@ -13,10 +13,10 @@ class TimestampMixin(BaseModel):
 
     Create_timestamp = models.DateTimeField(auto_now_add=True)
     Modify_timestamp = models.DateTimeField(auto_now=True)
-    Delete_timestamp = models.BooleanField(default=False,
-                                           null=True,
-                                           blank=True,
-                                           )
+    Delete_timestamp = models.DateTimeField(default=False,
+                                            null=True,
+                                            blank=True,
+                                            )
 
     def logical_delete(self):
         self.Delete_timestamp = timezone.now()
