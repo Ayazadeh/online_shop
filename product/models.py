@@ -78,6 +78,19 @@ class Category(TimestampMixin):
         return f'{self.category_name}'
 
 
+class Brand(TimestampMixin):
+    class Meta:
+        verbose_name = _("Brand")
+
+    brand_name = models.CharField(max_length=30,
+                                  verbose_name=_("brand:"),
+                                  help_text=_("add company")
+                                  )
+
+    def __str__(self):
+        return self.brand_name
+
+
 class Product(TimestampMixin):
     class Meta:
         verbose_name = _("product")
@@ -86,9 +99,13 @@ class Product(TimestampMixin):
                                     verbose_name=_("name:"),
                                     help_text=_("Enter name of product"))
 
-    brand = models.CharField(max_length=100,
-                             verbose_name=_("Brand:"),
-                             help_text=_("Enter name of manufacturer"))
+    brand = models.ForeignKey(Brand,
+                              on_delete=models.CASCADE,
+                              verbose_name=_("Brand:"),
+                              help_text=_("choose company"),
+                              null=False,
+                              blank=False
+                              )
 
     price = models.ForeignKey(Price,
                               on_delete=models.CASCADE,
