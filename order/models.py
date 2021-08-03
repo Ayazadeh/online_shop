@@ -20,21 +20,6 @@ class Order(TimestampMixin):
                                  on_delete=models.CASCADE,
                                  verbose_name=_("customer:"),
                                  help_text=_("choice customer"))
-
-    product_item = models.ForeignKey(Product,
-                                     on_delete=models.CASCADE,
-                                     verbose_name=_("item:"),
-                                     help_text=_("choice item you want"))
-
-    def number_product_exist(self):
-        if not self.number >= self.product_item.inventory:
-            raise ValidationError('inventory is not enough !!!')
-
-    number = models.PositiveIntegerField(default=1,
-                                         verbose_name=_("number:"),
-                                         help_text=_("add number of item's"),
-                                         validators=[number_product_exist])
-
     status = models.ForeignKey(OrderStatus,
                                on_delete=models.CASCADE,
                                verbose_name=_("status:"),
@@ -45,4 +30,27 @@ class Order(TimestampMixin):
         return cls.objects.filter(product_item=id)
 
     def __str__(self):
-        return f'- number:{self.number} - status:{self.status}'
+        return self.status.status
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order,
+                              on_delete=models.CASCADE)
+
+    customer = models.ForeignKey(Customer,
+                                 on_delete=models.CASCADE)
+
+    ordered = models.BooleanField(default=False)
+
+    product = models.ForeignKey(Product,
+                                on_delete=models.CASCADE)
+
+    def number_product_exist(self):
+        if not self.quantity >= self.product.inventory:
+            raise ValidationError('inventory is not enough !!!')
+
+    quantity = models.IntegerField(default=1,
+                                   validators=[number_product_exist])
+
+    def __str__(self):
+        return f'{self.quantity} of {self.product.product_name}'
