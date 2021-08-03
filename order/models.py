@@ -20,7 +20,7 @@ def number_item_validator(value):
         raise ValidationError('inventory is not enough !!!')
 
 
-class Orders(TimestampMixin):
+class Order(TimestampMixin):
     customer = models.ForeignKey(Customer,
                                  on_delete=models.CASCADE,
                                  verbose_name=_("customer:"),
@@ -42,8 +42,8 @@ class Orders(TimestampMixin):
                                help_text=_("choose status of order"))
 
     @classmethod
-    def order_by_menu_item(cls, id):
-        return cls.objects.filter(menu_items_id=id)
+    def order_by_product_item(cls, id):
+        return cls.objects.filter(product_item=id)
 
     def __str__(self):
         return f'- number:{self.number} - status:{self.status}'
