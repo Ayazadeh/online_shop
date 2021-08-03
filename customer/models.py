@@ -1,7 +1,6 @@
-from core.models import BaseModel
-from django.contrib.auth.models import User
+from core.models import *
 
 
-class Customer(BaseModel):
+class Customer(User, TimestampMixin):
     pass
 
