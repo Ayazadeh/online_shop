@@ -15,11 +15,6 @@ class OrderStatus(models.Model):
         return f"{self.status}"
 
 
-def number_item_validator(value):
-    if not value > product_item.inverntory:
-        raise ValidationError('inventory is not enough !!!')
-
-
 class Order(TimestampMixin):
     customer = models.ForeignKey(Customer,
                                  on_delete=models.CASCADE,
@@ -31,10 +26,14 @@ class Order(TimestampMixin):
                                      verbose_name=_("item:"),
                                      help_text=_("choice item you want"))
 
+    def number_product_exist(self):
+        if not self.number >= self.product_item.inventory:
+            raise ValidationError('inventory is not enough !!!')
+
     number = models.PositiveIntegerField(default=1,
                                          verbose_name=_("number:"),
                                          help_text=_("add number of item's"),
-                                         validators=[number_item_validator])
+                                         validators=[number_product_exist])
 
     status = models.ForeignKey(OrderStatus,
                                on_delete=models.CASCADE,
