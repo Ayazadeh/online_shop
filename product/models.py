@@ -1,24 +1,8 @@
+from django.urls import reverse
+
 from core.models import *
 from django.utils.translation import gettext_lazy as _
 from product.validators import *
-
-
-class Price(TimestampMixin):
-    class Meta:
-        verbose_name = _("price")
-
-    amount = models.PositiveIntegerField(verbose_name=_("amount:"),
-                                         help_text=_("The number you want to price"),
-                                         null=True,
-                                         blank=True)
-
-    price = models.PositiveIntegerField(verbose_name=_("price:"),
-                                        help_text=_("price of product"),
-                                        null=False,
-                                        blank=False)
-
-    def __str__(self):
-        return f'{self.price}'
 
 
 class Discount(TimestampMixin):
@@ -64,7 +48,8 @@ class Category(TimestampMixin):
     category_name = models.CharField(max_length=50,
                                      verbose_name=_("name:"),
                                      help_text=_("name of category"),
-                                     )
+                                     null=False,
+                                     blank=False)
 
     parent = models.ForeignKey('self',
                                on_delete=models.CASCADE,
@@ -84,7 +69,9 @@ class Brand(TimestampMixin):
 
     brand_name = models.CharField(max_length=30,
                                   verbose_name=_("brand:"),
-                                  help_text=_("add company")
+                                  help_text=_("add company"),
+                                  null=False,
+                                  blank=False
                                   )
 
     def __str__(self):
@@ -107,10 +94,9 @@ class Product(TimestampMixin):
                               blank=False
                               )
 
-    price = models.ForeignKey(Price,
-                              on_delete=models.CASCADE,
-                              verbose_name=_("price:"),
-                              help_text=_("choose price"))
+    price = models.PositiveIntegerField(verbose_name=_('price:'),
+                                        help_text=_("Enter price for product")
+                                        )
 
     discount = models.ForeignKey(Discount,
                                  on_delete=models.CASCADE,
@@ -124,21 +110,23 @@ class Product(TimestampMixin):
                                  help_text=_("choose category"))
 
     inventory = models.IntegerField(verbose_name=_("Inventory:"),
-                                    help_text=_("Inventory of product"))
+                                    help_text=_("Inventory of product"),
+                                    null=False,
+                                    blank=False)
 
     product_image = models.FileField(upload_to=f'product_image/',
                                      null=False,
                                      blank=False,
                                      validators=[validate_file_extension])
 
-    def final_and_total_price(self, count):
-        total_price = self.price.price * count
+    def final_price(self):
+        price = self.price.price
         final_price = 0
         if self.discount.unit == 'rial':
-            final_price = total_price - self.discount.amount
+            final_price = price - self.discount.amount
         elif self.discount.unit == 'percent':
-            final_price = total_price - (total_price * self.discount.amount)
-        return total_price, final_price
+            final_price = price - (price * self.discount.amount)
+        return final_price
 
     @classmethod
     def order_by_category(cls, id):
@@ -146,3 +134,13 @@ class Product(TimestampMixin):
 
     def __str__(self):
         return f'{self.id}# {self.product_name}'
+
+    def get_absolute_url(self):
+        print(self.pk)
+        return reverse("order:product", kwargs={'pk': self.pk})
+
+    def get_add_to_cart_url(self):
+        return reverse("order:add-to-cart", kwargs={'pk': self.pk})
+
+    def get_remove_from_cart_url(self):
+        return reverse("order:remove-from-cart", kwargs={'pk': self.pk})
