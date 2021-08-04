@@ -7,6 +7,8 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
+    deleted = models.BooleanField(default=False)
+
 
 class TimestampMixin(BaseModel):
     class Meta:
