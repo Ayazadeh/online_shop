@@ -3,6 +3,15 @@ from django.db import models
 from django.utils import timezone
 
 
+class BaseManager(models.Manager):
+
+    def get_queryset(self):
+        return super().get_queryset().filter(deleted=False)
+
+    def archive(self):
+        return super().get_queryset()
+
+
 class BaseModel(models.Model):
     class Meta:
         abstract = True
@@ -29,3 +38,7 @@ class User(AbstractUser):
     phone = models.CharField(max_length=11,
                              null=True,
                              blank=True)
+
+
+class TestModel(BaseModel):
+    pass
