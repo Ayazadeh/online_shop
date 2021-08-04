@@ -61,7 +61,7 @@
                                     aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            <div class="collapse navbar-collapse " id="navbarsExample04">
+                            <div class="collapse navbar-collapse " id="navbarExample04">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
                                         <a class="nav-link" href="#"> Home </a>
@@ -142,29 +142,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <div class="best_box">
-                    <h4>500GB <br>Micro SD Card</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod t dolor in reprehenderit
-                        in voluptate velit</p>
+            {% for i in object_list %}
+                <div class="col-md-4">
+
+                    <div class="card shadow d-inline-block" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ i.product_image.url }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ i.product_name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ i.category.category_name }}</h6>
+                            <p class="card-text">{{ i.brand.brand_name }}</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{ i.price.price }}
+                            <a href="#" class="btn btn-primary ml-5 w-50">Buy</a>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="best_box">
-                    <h4>100GB <br> Internal Ram</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod t dolor in reprehenderit
-                        in voluptate velit</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="best_box">
-                    <h4>100% <br> High Quality</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod t dolor in reprehenderit
-                        in voluptate velit</p>
-                </div>
-            </div>
+            {% endfor %}
             <div class="col-md-12">
-                <a class="read_more" href="#">Read more</a>
+                <a class="read_more" href="{% url 'product:product' %}">See more</a>
             </div>
         </div>
     </div>
@@ -267,10 +264,12 @@
                                         <div class="col-md-12">
                                             <div class="test_box">
                                                 <h3>Michl ro</h3>
-                                                <p><i class="padd_rightt0"><img src="{% static 'images/te1.png' %}" alt="#"/></i>There
+                                                <p><i class="padd_rightt0"><img src="{% static 'images/te1.png' %}"
+                                                                                alt="#"/></i>There
                                                     are many variations of passages of Lorem Ipsum available, but the
                                                     majority have suffered alteration in some <i
-                                                            class="padd_leftt0"><img src="{% static 'images/te2.png' %}" alt="#"/></i>
+                                                            class="padd_leftt0"><img src="{% static 'images/te2.png' %}"
+                                                                                     alt="#"/></i>
                                                     <br>form, by injected humour, or randomised words which don't look
                                                     even slightly believable</p>
                                             </div>
@@ -286,10 +285,12 @@
                                         <div class="col-md-12">
                                             <div class="test_box">
                                                 <h3>Michl ro</h3>
-                                                <p><i class="padd_rightt0"><img src="{% static 'images/te1.png' %}" alt="#"/></i>There
+                                                <p><i class="padd_rightt0"><img src="{% static 'images/te1.png' %}"
+                                                                                alt="#"/></i>There
                                                     are many variations of passages of Lorem Ipsum available, but the
                                                     majority have suffered alteration in some <i
-                                                            class="padd_leftt0"><img src="{% static 'images/te2.png' %}" alt="#"/></i>
+                                                            class="padd_leftt0"><img src="{% static 'images/te2.png' %}"
+                                                                                     alt="#"/></i>
                                                     <br>form, by injected humour, or randomised words which don't look
                                                     even slightly believable</p>
                                             </div>
@@ -305,10 +306,12 @@
                                         <div class="col-md-12">
                                             <div class="test_box">
                                                 <h3>Michl ro</h3>
-                                                <p><i class="padd_rightt0"><img src="{% static 'images/te1.png' %}" alt="#"/></i>There
+                                                <p><i class="padd_rightt0"><img src="{% static 'images/te1.png' %}"
+                                                                                alt="#"/></i>There
                                                     are many variations of passages of Lorem Ipsum available, but the
                                                     majority have suffered alteration in some <i
-                                                            class="padd_leftt0"><img src="{% static 'images/te2.png' %}" alt="#"/></i>
+                                                            class="padd_leftt0"><img src="{% static 'images/te2.png' %}"
+                                                                                     alt="#"/></i>
                                                     <br>form, by injected humour, or randomised words which don't look
                                                     even slightly believable</p>
                                             </div>
