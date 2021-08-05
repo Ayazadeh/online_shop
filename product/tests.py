@@ -23,6 +23,12 @@ class CategoryTest(TestCase):
     def test1_make_object(self):
         self.cat1 = Category.objects.create(category_name='laptop')
 
+
+class BrandTest(TestCase):
+
+    def test1_make_object(self):
+        self.brand = Brand.objects.create(brand_name='asus')
+
 # class ProductTest(TestCase):
 #
 #     def setUp(self) -> None:
