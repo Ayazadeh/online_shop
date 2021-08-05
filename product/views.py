@@ -8,7 +8,12 @@ from product.serializers import *
 
 class ProductView(ListView):
     model = Product
-    template_name = "product.html"
+    template_name = "product/product.html"
+
+
+class ProductDetail(DetailView):
+    model = Product
+    template_name = "product/product_detail.html"
 
 
 # view for REST API
