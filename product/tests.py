@@ -18,6 +18,11 @@ class DiscountTest(TestCase):
         self.dis1 = Discount.objects.create(amount=-20, unit='percent')
 
 
+class CategoryTest(TestCase):
+
+    def test1_make_object(self):
+        self.cat1 = Category.objects.create(category_name='laptop')
+
 # class ProductTest(TestCase):
 #
 #     def setUp(self) -> None:
