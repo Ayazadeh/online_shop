@@ -120,12 +120,12 @@ class Product(TimestampMixin):
                                      validators=[validate_file_extension])
 
     def final_price(self):
-        price = self.price.price
+        price = self.price
         final_price = 0
         if self.discount.unit == 'rial':
             final_price = price - self.discount.amount
         elif self.discount.unit == 'percent':
-            final_price = price - (price * self.discount.amount)
+            final_price = price - (price * (self.discount.amount/100))
         return final_price
 
     @classmethod
