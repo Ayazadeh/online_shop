@@ -29,28 +29,29 @@ class BrandTest(TestCase):
     def test1_make_object(self):
         self.brand = Brand.objects.create(brand_name='asus')
 
-# class ProductTest(TestCase):
-#
-#     def setUp(self) -> None:
-#         self.discount_1 = Discount.objects.create(
-#             amount=20,
-#             unit='percent'
-#         )
-#         self.category_1 = Category.objects.create(
-#             category_name='phone'
-#         )
-#         self.brand_1 = Brand.objects.create(
-#             brand_name='LG'
-#         )
-#         self.product_1 = Product.objects.create(
-#             product_name='k4',
-#             price=1000000,
-#             brand=self.brand_1,
-#             discount=self.discount_1,
-#             category=self.category_1,
-#             product_image=None,
-#             inventory=2
-#         )
-#
-#     def test1_final_price(self):
-#         self.assertEqual(self.product_1.final_price(), 7000000)
+
+class ProductTest(TestCase):
+
+    def setUp(self) -> None:
+
+        self.discount_1 = Discount.objects.create(
+            amount=20,
+            unit='percent'
+        )
+
+        self.category_1 = Category.objects.create(category_name='phone')
+
+        self.brand_1 = Brand.objects.create(brand_name='LG')
+
+        self.product_1 = Product.objects.create(
+            product_name='k4',
+            price=1000000,
+            brand=self.brand_1,
+            discount=self.discount_1,
+            category=self.category_1,
+            product_image=None,
+            inventory=2
+        )
+
+    def test1_final_price(self):
+        self.assertEqual(self.product_1.final_price(), 800000)
