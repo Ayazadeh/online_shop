@@ -7,10 +7,6 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['product_name', 'brand']
 
 
-class PriceAdmin(admin.ModelAdmin):
-    list_display = ['id', 'price']
-
-
 class DiscountAdmin(admin.ModelAdmin):
     list_display = ['id', 'discount_name', 'amount', 'unit', 'description']
     search_fields = ['discount_name', 'unit']
@@ -27,7 +23,6 @@ class BrandAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Price, PriceAdmin)
 admin.site.register(Discount, DiscountAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Brand, BrandAdmin)
