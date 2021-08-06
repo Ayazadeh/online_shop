@@ -1,12 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-
-# Create your views here.
+from rest_framework import generics, permissions
 from django.views import View
+from customer.permissions import *
+from customer.serializers import *
 
 
 # class LoginView(View):
@@ -27,6 +25,8 @@ from django.views import View
 #         return render(request, 'form.html', {'error': 'invalid login!!!'})
 #
 #
+
+
 class ProfileView(PermissionRequiredMixin, View):
     permission_required = 'auth.see_profile'
 
@@ -42,3 +42,36 @@ class Login(LoginView):
 
 class Logout(LogoutView):
     next_page = 'my_login'
+
+
+class UserListApi(generics.ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [
+        IsSuperUser
+    ]
+    queryset = Customer.objects.all()
+
+
+class UserDetailApi(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = UserSerializer
+    queryset = Customer.objects.all()
+    permission_classes = [
+        UserDetailOwner
+    ]
+
+
+class AddressListApi(generics.ListAPIView, generics.CreateAPIView):
+    serializer_class = AddressSerializer
+    queryset = Address.objects.all()
+
+    def get_queryset(self):
+        return Address.objects.filter(owner__user_id=self.request.user.id)
+
+
+class AddressDetailApi(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = AddressSerializer
+    queryset = Address.objects.all()
+    permission_classes = [
+        AddressDetailOwner
+    ]
+
