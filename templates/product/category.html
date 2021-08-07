@@ -1,0 +1,30 @@
+{% extends 'basehtml.html' %}
+{% load static %}
+{% block title %} categories {% endblock %}
+{% block head %}
+
+{% endblock %}
+{% block content %}
+    <div class="container UpDown">
+        <div class="row">
+            {% for category in object_list %}
+
+                <div class="col col-md-4 col-sm-6 position-relative">
+                    <div class="card shadow">
+{#                        <img class="card-img-top" src="{{ category.category_image.url }}" alt="Card image cap">#}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ category.category_name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ category.category.category_name }}</h6>
+                            <p class="card-text">{{ category.brand.brand_name }}</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{ category.price.price }}
+                            <a href="{{ category.get_absolute_url }}" class="btn btn-primary ml-5 w-50">Detail</a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
