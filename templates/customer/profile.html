@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf_8">
+    <title>about me</title>
+    <link rel="stylesheet" href="{% static 'css/widescreen.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" media="screen and (min-width: 995px)" href="{% static 'css/widescreen.css' %}">
+    <link rel="stylesheet" media="screen and (max-width: 994px)" href="{% static 'css/smallscreen.css' %}">
+</head>
+<body>
+<div id="page">
+    <nav role="navigation">
+        <div id="menuToggle">
+            <input type="checkbox">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div id="left">
+                <div class="left_up">
+                    <img src="{% static 'images/' %}" alt="picture" class="w3-circle">
+                </div>
+                <div class="name">
+                    <h3>Mohammad Ayazadeh</h3>
+                    <p>Back-End Developer
+                    <p>
+                </div>
+                <div class="social-icons">
+                    <ul>
+                        <li class="li"><a href="https://www.instagram.com/m.ayazadeh/"><i
+                                class="fa fa-instagram"></i></a>
+                        </li>
+                        <li class="li"><a href="https://www.linkedin.com/in/mmd-ayazadeh-b24128214/"><i
+                                class="fa fa-linkedin"></i></a></li>
+                        <li class="li"><a href="https://github.com/Ayazadeh"><i class="fa fa-github"></i> </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li><a href="#about">About Me</a></li>
+                        <li><a href="#experience">Expereince</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#works">WORKS</a></li>
+                        <li><a href="#contact">CONTACT</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="right">
+        <ul class="ul">
+            <li><strong>Birthday:</strong> 1377/07/29</li>
+            <li><strong>Location:</strong> Tehran, Iran</li>
+            <li><strong>Email:</strong> m.ayazadeh@gmail.com</li>
+            <li><strong>Phone:</strong> 09038586843</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
