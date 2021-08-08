@@ -1,8 +1,8 @@
 from django.urls import reverse
-
 from core.models import *
 from django.utils.translation import gettext_lazy as _
 from product.validators import *
+from django.core.exceptions import ValidationError
 
 
 class Discount(TimestampMixin):
@@ -18,8 +18,8 @@ class Discount(TimestampMixin):
     amount = models.PositiveIntegerField(verbose_name=_("amount:"),
                                          help_text=_("amount of discount"),
                                          null=False,
-                                         blank=False,
-                                         )
+                                         blank=False)
+
     description = models.CharField(max_length=300,
                                    verbose_name=_("description"),
                                    help_text=_("description for discount"),
@@ -44,6 +44,7 @@ class Discount(TimestampMixin):
 class Category(TimestampMixin):
     class Meta:
         verbose_name = _("category")
+        verbose_name_plural = _("categories")
 
     category_name = models.CharField(max_length=50,
                                      verbose_name=_("name:"),
@@ -58,6 +59,9 @@ class Category(TimestampMixin):
                                null=True,
                                blank=True,
                                )
+
+    def get_absolute_url(self):
+        return reverse("product:category_detail", args=(self.pk,))
 
     def __str__(self):
         return f'{self.category_name}'
@@ -125,7 +129,7 @@ class Product(TimestampMixin):
         if self.discount.unit == 'rial':
             final_price = price - self.discount.amount
         elif self.discount.unit == 'percent':
-            final_price = price - (price * (self.discount.amount/100))
+            final_price = price - (price * (self.discount.amount / 100))
         return final_price
 
     @classmethod
@@ -136,8 +140,7 @@ class Product(TimestampMixin):
         return f'{self.id}# {self.product_name}'
 
     def get_absolute_url(self):
-        print(self.pk)
-        return reverse("order:product", kwargs={'pk': self.pk})
+        return reverse("product:product_detail", args=(self.pk,))
 
     def get_add_to_cart_url(self):
         return reverse("order:add-to-cart", kwargs={'pk': self.pk})

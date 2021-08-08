@@ -6,7 +6,7 @@ class DiscountTest(TestCase):
 
     def test1_unit_percent(self):
         self.dis1 = Discount.objects.create(amount=0, unit='percent')
-        self.dis2 = Discount.objects.create(amount=20, unit='percent')
+        self.dis2 = Discount.objects.create(amount=40, unit='percent')
 
     def test2_unit_rial(self):
         self.dis1 = Discount.objects.create(amount=0, unit='rial')
