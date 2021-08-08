@@ -9,7 +9,9 @@ from product.models import Product
 class OrderStatus(models.Model):
     status = models.CharField(max_length=30,
                               verbose_name=_("status:"),
-                              help_text=_("add status for order's"))
+                              help_text=_("add status for order's"),
+                              null=False,
+                              blank=False)
 
     def __str__(self):
         return f"{self.status}"
