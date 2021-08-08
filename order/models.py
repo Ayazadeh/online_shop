@@ -25,6 +25,11 @@ class Order(TimestampMixin):
                                verbose_name=_("status:"),
                                help_text=_("choose status of order"))
 
+    items = models.ManyToManyField('OrderItem')
+    ordered = models.BooleanField(default=False)
+
+    ordered_date = models.DateTimeField()
+
     @classmethod
     def order_by_product_item(cls, id):
         return cls.objects.filter(product_item=id)
@@ -34,9 +39,6 @@ class Order(TimestampMixin):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order,
-                              on_delete=models.CASCADE)
-
     customer = models.ForeignKey(Customer,
                                  on_delete=models.CASCADE)
 
@@ -46,11 +48,11 @@ class OrderItem(models.Model):
                                 on_delete=models.CASCADE)
 
     def number_product_exist(self):
-        if not self.quantity >= self.product.inventory:
+        if self.quantity > self.product.inventory:
             raise ValidationError('inventory is not enough !!!')
 
-    quantity = models.IntegerField(default=1,
-                                   validators=[number_product_exist])
+    quantity = models.PositiveIntegerField(default=1,
+                                           validators=[number_product_exist])
 
     def __str__(self):
         return f'{self.quantity} of {self.product.product_name}'
