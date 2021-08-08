@@ -1,3 +1,15 @@
 from django.test import TestCase
+from order.models import *
+from customer.models import *
 
-# Create your tests here.
+
+class OrderStatusTest(TestCase):
+
+    def test1_order_status(self):
+        self.status = OrderStatus.objects.create(status='pay')
+
+
+class OrderTest(TestCase):
+
+    def test1_order_obj(self):
+        self.customer = Customer.objects.create()
