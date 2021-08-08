@@ -5,12 +5,12 @@
 
 {% endblock %}
 {% block content %}
-    <div class="container product">
+    <div class="container UpDown">
         <div class="row">
             {% for product in object_list %}
 
-                <div class="col col-md-4 col-sm-6 position-relative">
-                    <div class="card shadow">
+                <div class="col col-md-4 col-sm-6 position-relative mt-5">
+                    <div class="card shadow ">
                         <img class="card-img-top" src="{{ product.product_image.url }}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{ product.product_name }}</h5>
