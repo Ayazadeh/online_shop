@@ -9,8 +9,8 @@
         <div class="row">
             {% for product in object_list %}
 
-                <div class="col col-md-4 col-sm-6 position-relative mt-5">
-                    <div class="card shadow ">
+                <div class="col col-md-4 col-sm-6 col-xl-3 mt-5 d-flex">
+                    <div class="card shadow w-100">
                         <img class="card-img-top" src="{{ product.product_image.url }}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{ product.product_name }}</h5>
@@ -19,7 +19,7 @@
                         </div>
                         <div class="card-footer text-muted">
                             {{ product.price.price }}
-                            <a href="{{ product.get_absolute_url }}" class="btn btn-primary ml-5 w-50">Detail & Buy</a>
+                            <a href="{{ product.get_absolute_url }}" class="btn btn-primary ml-5 w-75">Detail & Buy</a>
                         </div>
                     </div>
                 </div>
