@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.utils import timezone
 
@@ -35,8 +35,14 @@ class TimestampMixin(BaseModel):
         self.save()
 
 
+class NewUserManager(UserManager):
+
+    def create_superuser(self, username, email=None, password=None, **extra_fields):
+        return super().create_superuser(username, email, password, **extra_fields)
+
+
 class User(AbstractUser):
-    pass
+    objects = NewUserManager()
 
 
 class TestModel(BaseModel):
