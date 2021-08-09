@@ -14,6 +14,9 @@ class Customer(TimestampMixin):
                              null=True,
                              blank=True)
 
+    def __str__(self):
+        return f'{self.id}# {self.user.username}'
+
 
 class Address(TimestampMixin):
     owner = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -33,3 +36,6 @@ class Address(TimestampMixin):
                               blank=True)
     zip_code = models.PositiveIntegerField()
     plaque = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f'{self.id}# {self.state}, {self.city}'
