@@ -1,8 +1,18 @@
 from core.models import *
+from customer.validators import *
 
 
 class Customer(TimestampMixin):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    customer_image = models.FileField(upload_to='customer/profile',
+                                      default='customer/profile/default.png',
+                                      null=True,
+                                      blank=True,
+                                      validators=[validate_file_extension]
+                                      )
+    phone = models.CharField(max_length=11,
+                             null=True,
+                             blank=True)
 
 
 class Address(TimestampMixin):
