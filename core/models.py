@@ -28,7 +28,7 @@ class TimestampMixin(BaseModel):
     modify_timestamp = models.DateTimeField(auto_now=True)
     delete_timestamp = models.DateTimeField(default=None,
                                             null=True,
-                                            blank=True,)
+                                            blank=True, )
 
     def logical_delete(self):
         self.delete_timestamp = timezone.now()
@@ -36,9 +36,7 @@ class TimestampMixin(BaseModel):
 
 
 class User(AbstractUser):
-    phone = models.CharField(max_length=11,
-                             null=True,
-                             blank=True)
+    pass
 
 
 class TestModel(BaseModel):
