@@ -3,10 +3,38 @@
 {% block title %} Create an Account {% endblock %}
 
 {% block content %}
-    <form method="POST" class=" UpDown">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Register</button>
-    </form>
+    <div class="container">
+        <div class="row UpDown justify-content-center">
+            <div class="col-9 col-sm-9 col-md-9 col-lg-4 col-xl-4">
+                <div class="card shadow w-auto ">
+                    <img class="card-img-top rounded-circle w-100 h-50 m-auto"
+                         src="{{ user.customer.customer_image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <form method="POST" class=" UpDown">
+                            {% csrf_token %}
+                            <label for="{{ form.username.1 }}">username:</label><br>
+                            {{ form.username }}<br><br>
+                            <label for="{{ form.first_name.2 }}">first name:</label><br>
+                            {{ form.first_name }}<br><br>
+                            <label for="{{ form.last_name.3 }}">Family:</label><br>
+                            {{ form.last_name }}<br><br>
+                            <label for="{{ form.email.4 }}">Email:</label><br>
+                            {{ form.last_name }}<br><br>
+                            <label for="{{ form.phone.5 }}">Phone:</label><br>
+                            {{ form.last_name }}<br><br>
+                            <label for="{{ form.password1.6 }}">password:</label><br>
+                            {{ form.last_name }}<br><br>
+                            <label for="{{ form.password2.7 }}">confirm password:</label><br>
+                            {{ form.last_name }}<br><br>
+                            <button type="submit" class="btn btn-success">Register</button>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'customer:logout' %}" class="btn btn-primary ml-5 w-75">exit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
