@@ -1,16 +1,15 @@
 {% extends 'basehtml.html' %}
-
+{% load static %}
 {% block title %} Create an Account {% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row UpDown justify-content-center">
-            <div class="col-9 col-sm-9 col-md-9 col-lg-4 col-xl-4">
+            <div class="col-9 col-sm-9 col-md-9 col-lg-6 col-xl-5">
                 <div class="card shadow w-auto ">
-                    <img class="card-img-top rounded-circle w-100 h-50 m-auto"
-                         src="{{ user.customer.customer_image.url }}" alt="Card image cap">
-                    <div class="card-body">
-                        <form method="POST" class=" UpDown">
+                    <img class="card-img-top" src="{% static 'images/register.png' %}" alt="Card image cap">
+                    <div class="card-body bg-light">
+                        <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <label for="{{ form.username.1 }}">username:</label><br>
                             {{ form.username }}<br><br>
@@ -19,13 +18,13 @@
                             <label for="{{ form.last_name.3 }}">Family:</label><br>
                             {{ form.last_name }}<br><br>
                             <label for="{{ form.email.4 }}">Email:</label><br>
-                            {{ form.last_name }}<br><br>
-                            <label for="{{ form.phone.5 }}">Phone:</label><br>
-                            {{ form.last_name }}<br><br>
+                            {{ form.email }}<br><br>
                             <label for="{{ form.password1.6 }}">password:</label><br>
-                            {{ form.last_name }}<br><br>
+                            {{ form.password1 }}<br><br>
                             <label for="{{ form.password2.7 }}">confirm password:</label><br>
-                            {{ form.last_name }}<br><br>
+                            {{ form.password2 }}<br><br>
+                            <label for="{{ form.customer_image.8 }}">Image (optional):</label><br>
+                            {{ form.customer_image }}<br><br>
                             <button type="submit" class="btn btn-success">Register</button>
                         </form>
                     </div>
