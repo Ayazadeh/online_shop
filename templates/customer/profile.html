@@ -8,6 +8,7 @@
             <div class="card shadow w-100 ">
                 <img class="card-img-top rounded-circle w-50 h-50 m-auto" src="{{ user.customer.customer_image.url }}" alt="Card image cap">
                 <div class="card-body">
+                    <p><b>UserName:</b> {{ user.username }}</p>
                     <p><b>Name:</b> {{ user.first_name }}</p>
                     <p><b>Family:</b> {{ user.last_name }}</p>
                     <p><b>Phone:</b> {{ user.customer.phone }}</p>
