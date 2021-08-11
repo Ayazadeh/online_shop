@@ -9,7 +9,7 @@
                 <div class="card shadow w-auto bg-light">
                     <img class="card-img-top" src="{% static 'images/register.png' %}" alt="Card image cap">
                     <div class="card-body bg-light">
-                        <form method="POST" enctype="multipart/form-data">
+                        <form method="POST">
                             {% csrf_token %}
                             {{ form.errors }}<br>
                             {{ form.username.errors }}<br>
