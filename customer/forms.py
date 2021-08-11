@@ -17,3 +17,14 @@ class RegisterForm(UserCreationForm):
                   'password1',
                   'password2',
                   'customer_image']
+
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = '__all__'
+        exclude = ['deleted',
+                   'owner',
+                   'lat',
+                   'lng',
+                   'delete_timestamp']
