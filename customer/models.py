@@ -2,8 +2,7 @@ from core.models import *
 from customer.validators import *
 
 
-class Customer(TimestampMixin):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Customer(User, TimestampMixin):
     customer_image = models.FileField(upload_to='customer/profile',
                                       default='customer/profile/default.png',
                                       null=True,
@@ -16,7 +15,7 @@ class Customer(TimestampMixin):
                              validators=[phone_validation])
 
     def __str__(self):
-        return f'{self.id}# {self.user.username}'
+        return f'{self.id}# {self.username}'
 
 
 class Address(TimestampMixin):
