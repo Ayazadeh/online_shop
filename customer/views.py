@@ -29,7 +29,13 @@ class Logout(LogoutView):
 class RegisterView(CreateView):
     template_name = 'customer/register.html'
     form_class = RegisterForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('customer:my_login')
+
+
+class AddressView(CreateView):
+    template_name = 'customer/address.html'
+    form_class = AddressForm
+    success_url = reverse_lazy('/')
 
 
 class UserListApi(generics.ListAPIView):
