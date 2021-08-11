@@ -11,7 +11,7 @@
             {% for product in category.product_set.all %}
 
                 <div class="col col-md-4 col-sm-6 d-flex">
-                    <div class="card shadow mt-5 w-100">
+                    <div class="card shadow mt-5 w-100 bg-light">
                         <img class="card-img-top" src="{{ product.product_image.url }}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{ product.product_name }}</h5>
