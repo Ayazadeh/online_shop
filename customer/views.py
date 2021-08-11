@@ -1,13 +1,17 @@
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
+from django.urls import reverse_lazy
 from rest_framework import generics, permissions
 from django.views import View
+from django.views.generic import CreateView
 from customer.permissions import *
 from customer.serializers import *
+from customer.forms import *
 
 
-class ProfileView(PermissionRequiredMixin, View):
+class ProfileView(LoginRequiredMixin, View):
     permission_required = 'auth.see_profile'
 
     def get(self, request, *args, **kwargs):
@@ -16,11 +20,16 @@ class ProfileView(PermissionRequiredMixin, View):
 
 class Login(LoginView):
     template_name = 'registration/login.html'
-    success_url = 'accounts/profile'
 
 
 class Logout(LogoutView):
-    template_name = 'index.html'
+    next_page = reverse_lazy('customer:my_login')
+
+
+class RegisterView(CreateView):
+    template_name = 'customer/register.html'
+    form_class = RegisterForm
+    success_url = reverse_lazy('login')
 
 
 class UserListApi(generics.ListAPIView):
@@ -54,10 +63,10 @@ class AddressDetailApi(generics.RetrieveUpdateDestroyAPIView):
         AddressDetailOwner
     ]
 
-# class LoginView(View):
+# class NewLoginView(View):
 #
 #     def get(self, request, *args, **kwargs):
-#         return render(request, 'login.html')
+#         return render(request, 'registration/login.html')
 #
 #     def post(self, request, *args, **kwargs):
 #         username = request.POST['username']
@@ -68,7 +77,15 @@ class AddressDetailApi(generics.RetrieveUpdateDestroyAPIView):
 #         print(user)
 #         if user:
 #             login(request, user)
-#             return redirect('profile')
-#         return render(request, 'login.html', {'error': 'invalid login!!!'})
-#
-#
+#             return redirect('customer:profile')
+#         return render(request, 'registration/login.html', {'error': 'invalid login!!!'})
+
+
+# def register(request):
+#     if request.method == 'POST':
+#         form = RegisterForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#     else:
+#         form = RegisterForm()
+#     return render(request, 'customer/register.html', {'form': form})
