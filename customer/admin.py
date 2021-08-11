@@ -5,14 +5,16 @@ from customer.models import *
 # Register your models here.
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'email', 'super_user']
-    search_fields = ['user__username']
-
-    def email(self, obj):
-        return obj.user.email
-
-    def super_user(self, obj):
-        return obj.user.is_superuser
+    list_display = ['user_ptr_id', 'username', 'email', 'is_superuser', 'phone']
+    search_fields = ['username', 'phone', 'first_name', 'last_name']
+    exclude = ['last_login',
+               'is_superuser',
+               'groups',
+               'user_permissions',
+               'is_staff',
+               'is_active',
+               'date_joined',
+               '']
 
 
 admin.site.register(Customer, CustomerAdmin)
