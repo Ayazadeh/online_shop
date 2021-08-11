@@ -29,11 +29,13 @@ class Address(TimestampMixin):
                             null=False,
                             blank=False)
 
-    lat = models.FloatField()
-    lng = models.FloatField()
-    detail = models.CharField(max_length=100,
+    lat = models.FloatField(null=True, blank=True)
+    lng = models.FloatField(null=True, blank=True)
+
+    detail = models.CharField(max_length=150,
                               null=True,
                               blank=True)
+
     zip_code = models.PositiveIntegerField()
     plaque = models.PositiveIntegerField()
 
