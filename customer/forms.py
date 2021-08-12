@@ -22,9 +22,5 @@ class RegisterForm(UserCreationForm):
 class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
-        fields = '__all__'
-        exclude = ['deleted',
-                   'owner',
-                   'lat',
-                   'lng',
-                   'delete_timestamp']
+        exclude = ['owner']
+

@@ -19,7 +19,10 @@ class Customer(User, TimestampMixin):
 
 
 class Address(TimestampMixin):
-    owner = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Customer,
+                              on_delete=models.CASCADE,
+                              null=False,
+                              blank=False)
 
     state = models.CharField(max_length=30,
                              null=False,
@@ -29,15 +32,21 @@ class Address(TimestampMixin):
                             null=False,
                             blank=False)
 
-    lat = models.FloatField(null=True, blank=True)
-    lng = models.FloatField(null=True, blank=True)
+    lat = models.FloatField(null=True,
+                            blank=True)
+
+    lng = models.FloatField(null=True,
+                            blank=True)
 
     detail = models.CharField(max_length=150,
                               null=True,
                               blank=True)
 
-    zip_code = models.PositiveIntegerField()
-    plaque = models.PositiveIntegerField()
+    zip_code = models.PositiveIntegerField(null=False,
+                                           blank=False)
+
+    plaque = models.PositiveIntegerField(null=False,
+                                         blank=False)
 
     def __str__(self):
         return f'{self.id}# {self.state}, {self.city}'
