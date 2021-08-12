@@ -35,7 +35,13 @@ class RegisterView(CreateView):
 class AddressView(CreateView):
     template_name = 'customer/address.html'
     form_class = AddressForm
-    success_url = reverse_lazy('/')
+    success_url = reverse_lazy('home:landing_page')
+
+    def form_valid(self, form):
+        address = form.save(commit=False)
+        address.owner = Customer.objects.get(user_ptr_id=self.request.user.id)
+        address.save()
+        return HttpResponse('Done!')
 
 
 class UserListApi(generics.ListAPIView):
