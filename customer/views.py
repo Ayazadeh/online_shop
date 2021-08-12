@@ -1,9 +1,8 @@
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, HttpResponse
 from django.urls import reverse_lazy
-from rest_framework import generics, permissions
+from rest_framework import generics
 from django.views import View
 from django.views.generic import CreateView
 from customer.permissions import *
