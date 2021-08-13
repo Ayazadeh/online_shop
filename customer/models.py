@@ -42,8 +42,11 @@ class Address(TimestampMixin):
                               null=True,
                               blank=True)
 
-    zip_code = models.PositiveIntegerField(null=False,
-                                           blank=False)
+    zip_code = models.CharField(max_length=10,
+                                null=False,
+                                blank=False,
+                                validators=[zip_code_validation]
+                                )
 
     plaque = models.PositiveIntegerField(null=False,
                                          blank=False)
