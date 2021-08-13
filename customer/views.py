@@ -14,7 +14,8 @@ class ProfileView(LoginRequiredMixin, View):
     permission_required = 'auth.see_profile'
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'customer/profile.html')
+        address = Customer.objects.get(user_ptr_id=self.request.user.id)
+        return render(request, 'customer/profile.html', {'address': address})
 
 
 class Login(LoginView):
@@ -34,13 +35,12 @@ class RegisterView(CreateView):
 class AddressView(CreateView):
     template_name = 'customer/address.html'
     form_class = AddressForm
-    success_url = reverse_lazy('home:landing_page')
+    success_url = reverse_lazy('customer:profile')
 
     def form_valid(self, form):
         address = form.save(commit=False)
         address.owner = Customer.objects.get(user_ptr_id=self.request.user.id)
-        address.save()
-        return HttpResponse('Done!')
+        return super().form_valid(form)
 
 
 class UserListApi(generics.ListAPIView):
