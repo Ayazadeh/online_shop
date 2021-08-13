@@ -14,8 +14,15 @@ class DiscountTest(TestCase):
 
     def test3_amount_negative(self):
         # This code should give an error
-        self.dis1 = Discount.objects.create(amount=-20, unit='rial')
-        self.dis1 = Discount.objects.create(amount=-20, unit='percent')
+        self.assertRaises(Exception,
+                          Discount.objects.create,
+                          amount=-20,
+                          unit='rial')
+
+        self.assertRaises(Exception,
+                          Discount.objects.create,
+                          amount=-20,
+                          unit='percent')
 
 
 class CategoryTest(TestCase):
@@ -33,7 +40,6 @@ class BrandTest(TestCase):
 class ProductTest(TestCase):
 
     def setUp(self) -> None:
-
         self.discount_1 = Discount.objects.create(
             amount=20,
             unit='percent'
