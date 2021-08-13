@@ -139,9 +139,6 @@ class Product(TimestampMixin):
     def __str__(self):
         return f'{self.id}# {self.product_name}'
 
-    def get_absolute_url(self):
-        return reverse("product:product_detail", args=(self.pk,))
-
     def get_add_to_cart_url(self):
         return reverse("order:add-to-cart", kwargs={'pk': self.pk})
 
