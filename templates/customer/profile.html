@@ -16,14 +16,17 @@
                         <p><b>Family:</b> {{ user.last_name }}</p>
                         <p><b>Phone:</b> {{ user.customer.phone }}</p>
                         <p><b>Email:</b> {{ user.email }}</p>
-
-                        {% for address in address.address_set.all %}
-                            <p><b>Address:</b>
-                                {{ address.state }} -
-                                {{ address.city }} -
-                                {{ address.plaque }} -
-                                {{ address.zip_code }}</p>
-                        {% endfor %}
+                        {% if address.address_set.all %}
+                            {% for address in address.address_set.all %}
+                                <p><b>Address:</b>
+                                    {{ address.state }} -
+                                    {{ address.city }} -
+                                    {{ address.plaque }} -
+                                    {{ address.zip_code }}</p>
+                            {% endfor %}
+                        {% else %}
+                            <p><b>Address: <span class="text-danger">no address entered yet</span></b></p>
+                        {% endif %}
                     </div>
                     <div class="card-footer text-center">
                         <a href="{% url 'customer:address' %}" class="btn btn-primary w-25">Address+</a>
