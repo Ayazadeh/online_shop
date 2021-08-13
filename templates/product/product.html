@@ -18,8 +18,10 @@
                             <p class="card-text">{{ product.brand.brand_name }}</p>
                         </div>
                         <div class="card-footer text-muted">
-                            {{ product.price.price }}
-                            <a href="{% url 'product:product_detail' product.id %}" class="btn btn-primary ml-5 w-75">Detail & Buy</a>
+                            <p class="text-primary"><b>Price:</b> {{ product.price }}</p>
+                            <br>
+                            <a href="{% url 'product:product_detail' product.id %}"
+                               class="btn btn-outline-primary ml-5 w-75">Detail & Buy</a>
                         </div>
                     </div>
                 </div>
