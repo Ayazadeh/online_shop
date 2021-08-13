@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from rest_framework import generics
 from django.views import View
