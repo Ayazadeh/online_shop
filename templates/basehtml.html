@@ -29,8 +29,8 @@
     {% block head %}
     {% endblock %}
     <style>
-        li:hover {
-            background-color: #25be7a;
+        .navbar-nav li:hover {
+            background-color: #d0d0cb;
         }
 
         .UpDown {
@@ -38,6 +38,9 @@
             margin-bottom: 5rem;
         }
 
+        li {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -57,7 +60,7 @@
                                             <span class="navbar-toggler-icon"></span>
                                         </button>
                                         <div class="collapse navbar-collapse " id="navbarExample04">
-                                            <ul class="navbar-nav sticky">
+                                            <ul class="navbar-nav">
                                                 <li class="nav-item">
                                                     <a class="nav-link text-muted" href="{% url 'home:landing_page' %}">
                                                         Home </a>
