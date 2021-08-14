@@ -82,6 +82,10 @@ class Brand(TimestampMixin):
         return self.brand_name
 
 
+def product_image_path(instance, filename):
+    return f'product/{instance.category.category_name}/{filename}'
+
+
 class Product(TimestampMixin):
     class Meta:
         verbose_name = _("product")
@@ -118,7 +122,7 @@ class Product(TimestampMixin):
                                     null=False,
                                     blank=False)
 
-    product_image = models.FileField(upload_to=f'product_image/',
+    product_image = models.FileField(upload_to=product_image_path,
                                      null=False,
                                      blank=False,
                                      validators=[validate_file_extension])
