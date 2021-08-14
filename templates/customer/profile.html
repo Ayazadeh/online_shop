@@ -7,7 +7,7 @@
             <div class="col-9 col-sm-9 col-md-9 col-lg-4 col-xl-4">
                 <div class="card shadow w-100 bg-light">
                     <div>
-                        <img class="card-img-top w-50 h-100 m-auto"
+                        <img class="card-img-top w-50 rounded-circle h-100 m-auto"
                              src="{{ user.customer.customer_image.url }}" alt="Card image cap">
                     </div>
                     <div class="card-body">
@@ -25,7 +25,7 @@
                                     {{ address.zip_code }}</p>
                             {% endfor %}
                         {% else %}
-                            <p><b>Address: <span class="text-danger">no address entered yet</span></b></p>
+                            <p><b>Address: <span class="text-danger">no address entered yet !!!</span></b></p>
                         {% endif %}
                     </div>
                     <div class="card-footer text-center">
