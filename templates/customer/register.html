@@ -9,7 +9,7 @@
                 <div class="card shadow w-auto bg-light">
                     <img class="card-img-top" src="{% static 'images/register.png' %}" alt="Card image cap">
                     <div class="card-body bg-light text-center">
-                        <form method="POST">
+                        <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ form.errors }}<br>
                             {{ form.username.errors }}<br>
@@ -22,6 +22,9 @@
                             {{ form.email.errors }}
                             <label for="{{ form.email.4 }}">Email:</label><br>
                             {{ form.email }}<br><br>
+                            {{ form.phone.errors }}
+                            <label for="{{ form.phone.5 }}">Phone:</label><br>
+                            {{ form.phone }}<br><br>
                             {{ form.password1.errors }}
                             <label for="{{ form.password1.6 }}">password:</label><br>
                             {{ form.password1 }}<br><br>
