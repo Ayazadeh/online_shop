@@ -3,7 +3,7 @@ from customer.validators import *
 
 
 class Customer(User, TimestampMixin):
-    customer_image = models.FileField(upload_to='customer/profile',
+    customer_image = models.FileField(upload_to="customer/profile",
                                       default='customer/profile/default.png',
                                       null=True,
                                       blank=True,
