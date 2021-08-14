@@ -152,7 +152,7 @@
         </div>
         <div class="row">
             {% for product in object_list %}
-                {% if forloop.counter <= 8 %}
+{#                {% if forloop.counter <= 8 %}#}
                     <div class="col-md-4 col-sm-6 col-xl-3 d-flex">
                         <div class="card shadow w-100 mt-5">
                             <img class="card-img-top" src="{{ product.product_image.url }}" alt="Card image cap">
@@ -169,7 +169,7 @@
                             </div>
                         </div>
                     </div>
-                {% endif %}
+{#                {% endif %}#}
             {% endfor %}
             <div class="col-md-12">
                 <a class="read_more" href="{% url 'product:product' %}">See more</a>
