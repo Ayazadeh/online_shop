@@ -18,7 +18,7 @@
                         <p><b>Email:</b> {{ user.email }}</p>
                         {% if address.address_set.all %}
                             {% for address in address.address_set.all %}
-                                <p><b>Address:</b>
+                                <p><b>Address-{{ forloop.counter }}:</b>
                                     {{ address.state }} -
                                     {{ address.city }} -
                                     {{ address.plaque }} -
