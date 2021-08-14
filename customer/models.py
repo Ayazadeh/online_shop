@@ -2,8 +2,12 @@ from core.models import *
 from customer.validators import *
 
 
+def customer_image_path(instance, filename):
+    return f'customer/profile/{User.objects.get(id=instance.user_ptr_id).username}/{filename}'
+
+
 class Customer(User, TimestampMixin):
-    customer_image = models.FileField(upload_to="customer/profile",
+    customer_image = models.FileField(upload_to=customer_image_path,
                                       default='customer/profile/default.png',
                                       null=True,
                                       blank=True,
