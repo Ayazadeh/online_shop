@@ -17,7 +17,19 @@
                         <p class="card-text">{{ product.brand.brand_name }}</p>
                     </div>
                     <div class="card-footer text-muted">
-                        <p class="text-primary"><b>Price:</b> {{ product.price }}</p>
+                        <p class="text-primary"><b>Price:</b> {{ product.price }}
+                            {% if product.discount.amount > 0 %}
+                                <b class="text-danger">
+                                    {{ product.discount.amount }}{% if product.discount.unit == 'percent' %}
+                                        %{% else %}
+                                        {{ product.discount.unit }}{% endif %}
+                                </b>
+                                </p>
+                                <p class="text-success">
+                                    <b>Final Price:</b>
+                                    {{ product.final_price }}
+                                </p>
+                            {% endif %}
                         <br>
                         <a href="#" class="btn btn-outline-primary ml-5 w-75">Buy</a>
                     </div>

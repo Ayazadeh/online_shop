@@ -152,24 +152,36 @@
         </div>
         <div class="row">
             {% for product in object_list %}
-{#                {% if forloop.counter <= 8 %}#}
-                    <div class="col-md-4 col-sm-6 col-xl-3 d-flex">
-                        <div class="card shadow w-100 mt-5">
-                            <img class="card-img-top" src="{{ product.product_image.url }}" alt="Card image cap">
-                            <div class="card-body ">
-                                <h5 class="card-title">{{ product.product_name }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ product.category.category_name }}</h6>
-                                <p class="card-text">{{ product.brand.brand_name }}</p>
-                            </div>
-                            <div class="card-footer text-muted">
-                                <p class="text-primary"><b>Price:</b> {{ product.price }}</p>
-                                <br>
-                                <a href="{% url 'product:product_detail' product.id %}"
-                                   class="btn btn-outline-primary w-75">Buy</a>
-                            </div>
+                {#                {% if forloop.counter <= 8 %}#}
+                <div class="col-md-4 col-sm-6 col-xl-3 d-flex">
+                    <div class="card shadow w-100 mt-5">
+                        <img class="card-img-top" src="{{ product.product_image.url }}" alt="Card image cap">
+                        <div class="card-body ">
+                            <h5 class="card-title">{{ product.product_name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ product.category.category_name }}</h6>
+                            <p class="card-text">{{ product.brand.brand_name }}</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <p class="text-primary"><b>Price:</b> {{ product.price }}
+                                {% if product.discount.amount > 0 %}
+                                    <b class="text-danger">
+                                        {{ product.discount.amount }}{% if product.discount.unit == 'percent' %}
+                                            %{% else %}
+                                            {{ product.discount.unit }}{% endif %}
+                                    </b>
+                                    </p>
+                                    <p class="text-success">
+                                        <b>Final Price:</b>
+                                        {{ product.final_price }}
+                                    </p>
+                                {% endif %}
+                            <br>
+                            <a href="{% url 'product:product_detail' product.id %}"
+                               class="btn btn-outline-primary w-75">Buy</a>
                         </div>
                     </div>
-{#                {% endif %}#}
+                </div>
+                {#                {% endif %}#}
             {% endfor %}
             <div class="col-md-12">
                 <a class="read_more" href="{% url 'product:product' %}">See more</a>
