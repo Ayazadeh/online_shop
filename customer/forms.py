@@ -14,6 +14,7 @@ class RegisterForm(UserCreationForm):
                   'first_name',
                   'last_name',
                   'email',
+                  'phone',
                   'password1',
                   'password2',
                   'customer_image']
