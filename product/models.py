@@ -49,6 +49,7 @@ class Category(TimestampMixin):
     category_name = models.CharField(max_length=50,
                                      verbose_name=_("name:"),
                                      help_text=_("name of category"),
+                                     unique=True,
                                      null=False,
                                      blank=False)
 
