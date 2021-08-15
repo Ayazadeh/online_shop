@@ -13,12 +13,12 @@ class CustomerTest(TestCase):
         )
 
     def test2_customer_obj(self):
-        self.test = Customer.objects.create(
+        self.assertRaises(Exception, Customer.objects.create(
             username='mohammad',
             email='m.ayazadeh@gmail.com',
             password='123456789',
-            phone='038586843'
-        )
+            phone='123'
+        ))
 
 
 class AddressTest(TestCase):
