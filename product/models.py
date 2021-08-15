@@ -2,12 +2,12 @@ from django.urls import reverse
 from core.models import *
 from django.utils.translation import gettext_lazy as _
 from product.validators import *
-from django.core.exceptions import ValidationError
 
 
 class Discount(TimestampMixin):
     class Meta:
-        verbose_name = _("discount")
+        verbose_name = _("Discount")
+        verbose_name_plural = _("Discounts")
 
     discount_name = models.CharField(max_length=100,
                                      verbose_name=_("name:"),
@@ -71,6 +71,7 @@ class Category(TimestampMixin):
 class Brand(TimestampMixin):
     class Meta:
         verbose_name = _("Brand")
+        verbose_name_plural = _("Brands")
 
     brand_name = models.CharField(max_length=30,
                                   verbose_name=_("brand:"),
@@ -89,7 +90,8 @@ def product_image_path(instance, filename):
 
 class Product(TimestampMixin):
     class Meta:
-        verbose_name = _("product")
+        verbose_name = _("Product")
+        verbose_name_plural = _("Products")
 
     product_name = models.CharField(max_length=100,
                                     verbose_name=_("name:"),
