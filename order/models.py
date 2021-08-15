@@ -36,6 +36,11 @@ class Order(TimestampMixin):
     def order_by_product_item(cls, id):
         return cls.objects.filter(product_item=id)
 
+    @staticmethod
+    def total_price(product_id, count):
+        price = Product.objects.get(id=product_id).final_price()
+        return price * count
+
     def __str__(self):
         return self.status.status
 
