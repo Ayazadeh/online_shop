@@ -1,5 +1,6 @@
 from core.models import *
 from customer.validators import *
+from django.utils.translation import gettext_lazy as _
 
 
 def customer_image_path(instance, filename):
@@ -7,6 +8,10 @@ def customer_image_path(instance, filename):
 
 
 class Customer(User, TimestampMixin):
+    class Meta:
+        verbose_name = _('Customer')
+        verbose_name_plural = _("Customers")
+
     customer_image = models.FileField(upload_to=customer_image_path,
                                       default='customer/profile/default.png',
                                       null=True,
@@ -23,6 +28,10 @@ class Customer(User, TimestampMixin):
 
 
 class Address(TimestampMixin):
+    class Meta:
+        verbose_name = _("Address")
+        verbose_name_plural = _("Addresses")
+
     owner = models.ForeignKey(Customer,
                               on_delete=models.CASCADE,
                               null=False,
