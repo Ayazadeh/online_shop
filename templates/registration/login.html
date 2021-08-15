@@ -2,39 +2,39 @@
 {% load static %}
 {% block title %} LOGIN {% endblock %}
 {% block head %}
-<style>
-    .card{
-        width: 20rem;
-        height: 30rem;
-        margin-top: 5rem;
-        margin-bottom: 3rem;
-    }
-</style>
+    <style>
+        .card {
+            width: 20rem;
+            height: 30rem;
+            margin-top: 5rem;
+            margin-bottom: 3rem;
+        }
+    </style>
 {% endblock %}
 {% block content %}
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col col-md-4 col-sm-6 col-xl-3">
-            <div class="card shadow bg-light">
-                <img class="card-img-top" src="{% static 'images/login.png' %}" alt="Card image cap">
-                <div class="card-body">
-                    <form method="POST">
-                        {{ error }}
-                        <label for="username">username</label>
-                        <input type="text" name="username"><br>
-                        <label for="password">password</label>
-                        <input type="password" name="password"><br>
-                        <input type="submit" class="mt-3" value="submit">
-                        {% csrf_token %}
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <a href="{% url 'customer:change_password' %}" class="w-25">Forgot Password?</a>
-                    <a href="{% url 'customer:register' %}" class="btn btn-primary ml-2 w-50">Register</a>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col col-md-4 col-sm-6 col-xl-3">
+                <div class="card shadow bg-light">
+                    <img class="card-img-top" src="{% static 'images/login.png' %}" alt="Card image cap">
+                    <div class="card-body">
+                        <form method="POST">
+                            {{ error }}
+                            <label for="username">username</label>
+                            <input type="text" name="username"><br>
+                            <label for="password">password</label>
+                            <input type="password" name="password"><br>
+                            <input type="submit" class="mt-3" value="submit">
+                            {% csrf_token %}
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'customer:change_password' %}" class="w-25">Forgot Password?</a>
+                        <a href="{% url 'customer:register' %}" class="btn btn-primary ml-2 w-50">Register</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

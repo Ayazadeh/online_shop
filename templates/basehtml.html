@@ -10,6 +10,8 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <!-- style css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -20,7 +22,6 @@
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
     <!-- Tweaks for older IEs-->
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
           media="screen">
     <!--[if lt IE 9]>
@@ -48,12 +49,22 @@
     <div class="row">
         <div class="col">
             <header>
+                <div>
+                    <a href="#">
+                        <span class="badge badge-pill border-danger bg-danger text-light">
+                            1
+                        </span>
+                        <i class="fa fa-shopping-cart display-4 text-secondary"></i>
+                    </a>
+                </div>
                 <div class="head_top">
                     <div class="header">
                         <div class="container">
                             <div class="row">
                                 <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+
                                     <nav class="navigation navbar navbar-expand-md navbar-dark">
+
                                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                                                 data-target="#navbarExample04" aria-controls="navbarsExample04"
                                                 aria-expanded="false" aria-label="Toggle navigation">
