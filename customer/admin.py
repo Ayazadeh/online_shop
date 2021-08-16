@@ -2,8 +2,6 @@ from django.contrib import admin
 from customer.models import *
 
 
-# Register your models here.
-
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ['user_ptr_id', 'username', 'email', 'is_superuser', 'phone']
     search_fields = ['username', 'phone', 'first_name', 'last_name']
@@ -15,6 +13,13 @@ class CustomerAdmin(admin.ModelAdmin):
                'is_active',
                'date_joined',
                '']
+
+    # def save_model(self, request, obj, form, change):
+    #     print(obj.is_authenticated)
+    #     form1 = form.save(commit=False)
+    #     if obj.is_authenticated:
+    #         obj.set_password(obj.password)
+    #         super().save_model(request, obj, form, change)
 
 
 class AddressAdmin(admin.ModelAdmin):
