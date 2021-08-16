@@ -136,7 +136,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'customer:my_login'
-LOGIN_REDIRECT_URL = 'customer:profile'
+# default is profile
+# LOGIN_REDIRECT_URL = 'customer:profile'
 
 LOCALE_PATHS = [BASE_DIR / 'locale']
 
