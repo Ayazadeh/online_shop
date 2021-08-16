@@ -4,10 +4,17 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from rest_framework import generics
 from django.views import View
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from customer.permissions import *
 from customer.serializers import *
 from customer.forms import *
+
+
+class UserChange(LoginRequiredMixin, UpdateView):
+    template_name = 'customer/user_edit.html'
+    success_url = reverse_lazy('customer:profile')
+    form_class = NewUserChangeForm
+    model = Customer
 
 
 class ProfileView(LoginRequiredMixin, View):
