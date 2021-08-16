@@ -2,8 +2,12 @@
 {% load static %}
 {% block title %} Profile {% endblock %}
 {% block content %}
-    <div class="container-fluid">
-        <div class="row UpDown">
+
+    <div class="container-fluid mt-5">
+        {% if user.is_authenticated %}
+            <p class="text-success font-weight-bold">Welcome, <span class="text-info text-capitalize">{{ user.username }}</span>. Thanks for logging in.</p>
+        {% endif %}
+        <div class="row">
             <div class="col-9 col-sm-9 col-md-9 col-lg-4 col-xl-4">
                 <div class="card shadow w-100 bg-light">
                     <div>
@@ -11,14 +15,14 @@
                              src="{{ user.customer.customer_image.url }}" alt="Card image cap">
                     </div>
                     <div class="card-body">
-                        <p><b>UserName:</b> {{ user.username }}</p>
-                        <p><b>Name:</b> {{ user.first_name }}</p>
-                        <p><b>Family:</b> {{ user.last_name }}</p>
-                        <p><b>Phone:</b> {{ user.customer.phone }}</p>
-                        <p><b>Email:</b> {{ user.email }}</p>
+                        <p><b class="text-primary font-weight-bold">UserName:</b> {{ user.username }}</p>
+                        <p><b class="text-primary font-weight-bold">Name:</b> {{ user.first_name }}</p>
+                        <p><b class="text-primary font-weight-bold">Family:</b> {{ user.last_name }}</p>
+                        <p><b class="text-primary font-weight-bold">Phone:</b> {{ user.customer.phone }}</p>
+                        <p><b class="text-primary font-weight-bold">Email:</b> {{ user.email }}</p>
                         {% if address.address_set.all %}
                             {% for address in address.address_set.all %}
-                                <p><b>Address-{{ forloop.counter }}:</b>
+                                <p><b class="text-primary font-weight-bold">Address-{{ forloop.counter }}:</b>
                                     {{ address.state }} -
                                     {{ address.city }} -
                                     {{ address.plaque }} -
@@ -30,7 +34,8 @@
                     </div>
                     <div class="card-footer text-center">
                         <a href="{% url 'customer:address' %}" class="btn btn-primary w-25">Address+</a>
-                        <a href="{% url 'customer:logout' %}" class="btn btn-primary ml-4 w-25">exit</a>
+                        <a href="{% url 'customer:user_edit' user.id %}" class="btn btn-primary ml-4 w-25">Edit</a>
+                        <a href="{% url 'customer:logout' %}" class="btn btn-primary ml-4 w-25">Exit</a>
                     </div>
                 </div>
             </div>
