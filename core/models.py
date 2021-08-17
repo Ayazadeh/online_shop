@@ -31,6 +31,7 @@ class TimestampMixin(BaseModel):
                                             blank=True, )
 
     def logical_delete(self):
+        self.deleted = True
         self.delete_timestamp = timezone.now()
         self.save()
 
