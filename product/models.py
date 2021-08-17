@@ -129,6 +129,7 @@ class Product(TimestampMixin):
                                      null=False,
                                      blank=False,
                                      validators=[validate_file_extension])
+    promote = models.BooleanField(default=False)
 
     def final_price(self):
         price = self.price
