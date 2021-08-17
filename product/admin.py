@@ -29,6 +29,12 @@ class ProductAdmin(admin.ModelAdmin):
         'brand',
         'product_image'
     ]
+    list_filter = [
+        'product_name',
+        'category',
+        'price',
+        'discount'
+    ]
 
 
 class DiscountAdmin(admin.ModelAdmin):
@@ -54,6 +60,8 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'category_name', 'parent']
     search_fields = ['category_name']
     fields = ['category_name', 'parent']
+
+    list_filter = ['parent']
 
 
 class BrandAdmin(admin.ModelAdmin):
