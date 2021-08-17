@@ -2,44 +2,8 @@ from django.contrib import admin
 from customer.models import *
 
 
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = [
-        'user_ptr_id',
-        'username',
-        'email',
-        'is_superuser',
-        'phone',
-        'is_active'
-    ]
-    search_fields = [
-        'username',
-        'phone',
-        'first_name',
-        'last_name'
-    ]
-
-    fieldsets = [
-        ("required",
-         {'fields': [
-             'username',
-             'phone',
-             'password'
-         ]}),
-        ("optional",
-         {'fields': [
-             'first_name',
-             'last_name',
-             'email',
-             'customer_image'
-         ]})
-    ]
-
-    # def save_model(self, request, obj, form, change):
-    #     obj.set_password(obj.password)
-    #     super().save_model(request, obj, form, change)
-
-
-class AddressAdmin(admin.ModelAdmin):
+class AddressInline(admin.StackedInline):
+    model = Address
     list_display = [
         'id',
         'owner_address',
@@ -77,6 +41,46 @@ class AddressAdmin(admin.ModelAdmin):
          })
     ]
 
+    extra = 1
+
+
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = [
+        'user_ptr_id',
+        'username',
+        'email',
+        'is_superuser',
+        'phone',
+        'is_active'
+    ]
+    search_fields = [
+        'username',
+        'phone',
+        'first_name',
+        'last_name'
+    ]
+
+    fieldsets = [
+        ("required",
+         {'fields': [
+             'username',
+             'phone',
+             'password'
+         ]}),
+        ("optional",
+         {'fields': [
+             'first_name',
+             'last_name',
+             'email',
+             'customer_image'
+         ]})
+    ]
+
+    inlines = {AddressInline}
+
+    # def save_model(self, request, obj, form, change):
+    #     obj.set_password(obj.password)
+    #     super().save_model(request, obj, form, change)
+
 
 admin.site.register(Customer, CustomerAdmin)
-admin.site.register(Address, AddressAdmin)
