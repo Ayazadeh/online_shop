@@ -40,7 +40,6 @@ class AddressInline(admin.StackedInline):
          ]
          })
     ]
-
     extra = 1
 
 
@@ -51,7 +50,7 @@ class CustomerAdmin(admin.ModelAdmin):
         'email',
         'is_superuser',
         'phone',
-        'is_active'
+        'is_active',
     ]
     search_fields = [
         'username',
@@ -78,9 +77,14 @@ class CustomerAdmin(admin.ModelAdmin):
 
     inlines = [AddressInline]
 
-    # def save_model(self, request, obj, form, change):
-    #     obj.set_password(obj.password)
-    #     super().save_model(request, obj, form, change)
+    list_filter = [
+        'username',
+        'phone'
+    ]
+
+# def save_model(self, request, obj, form, change):
+#     obj.set_password(obj.password)
+#     super().save_model(request, obj, form, change)
 
 
 admin.site.register(Customer, CustomerAdmin)
