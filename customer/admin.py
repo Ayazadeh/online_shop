@@ -17,15 +17,7 @@ class CustomerAdmin(admin.ModelAdmin):
         'first_name',
         'last_name'
     ]
-    exclude = [
-        'last_login',
-        'is_superuser',
-        'groups',
-        'user_permissions',
-        'is_staff',
-        'is_active',
-        'date_joined',
-    ]
+
     fieldsets = [
         (None,
          {'fields': [
