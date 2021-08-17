@@ -76,7 +76,7 @@ class CustomerAdmin(admin.ModelAdmin):
          ]})
     ]
 
-    inlines = {AddressInline}
+    inlines = [AddressInline]
 
     # def save_model(self, request, obj, form, change):
     #     obj.set_password(obj.password)
