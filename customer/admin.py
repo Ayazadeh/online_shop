@@ -19,14 +19,17 @@ class CustomerAdmin(admin.ModelAdmin):
     ]
 
     fieldsets = [
-        (None,
+        ("required",
          {'fields': [
              'username',
+             'phone',
+             'password'
+         ]}),
+        ("optional",
+         {'fields': [
              'first_name',
              'last_name',
              'email',
-             'phone',
-             'password',
              'customer_image'
          ]})
     ]
@@ -57,17 +60,21 @@ class AddressAdmin(admin.ModelAdmin):
         return obj.owner.username
 
     fieldsets = [
-        (None,
+        ("required",
          {'fields': [
              'owner',
              'state',
              'city',
-             'detail',
              'zip_code',
              'plaque',
+         ]}),
+        ('optional',
+         {'fields': [
+             'detail',
              'lat',
              'lng'
-         ]})
+         ]
+         })
     ]
 
 
