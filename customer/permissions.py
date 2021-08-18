@@ -9,11 +9,10 @@ class IsSuperUser(permissions.BasePermission):
 
 class UserDetailOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        return obj.user == request.user
+        return obj.user_ptr_id == request.user.id
 
 
 class AddressDetailOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        print(obj.owner.user)
-        print(request.user)
-        return obj.owner.user == request.user
+        return obj.owner.user_ptr_id == request.user.id
+
