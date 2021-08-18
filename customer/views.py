@@ -71,7 +71,6 @@ class UserDetailApi(generics.RetrieveUpdateDestroyAPIView):
 
 class AddressListApi(generics.ListAPIView, generics.CreateAPIView):
     serializer_class = AddressSerializer
-    queryset = Address.objects.all()
 
     def get_queryset(self):
         return Address.objects.filter(owner=self.request.user)
