@@ -1,5 +1,5 @@
 {% extends 'basehtml.html' %}
-
+{% load static %}
 {% block title %} Edit {{ user.username }} {% endblock %}
 
 {% block content %}
@@ -8,15 +8,8 @@
         <div class="row UpDown justify-content-center">
             <div class="col-9 col-sm-9 col-md-9 col-lg-6 col-xl-5">
                 <div class="card shadow w-auto bg-light">
-                    {#                    <img class="card-img-top" src="{% static 'images/register.png' %}" alt="Card image cap">#}
+                    <img class="card-img-top" src="{% static 'images/edit.webp' %}" alt="Card image cap">
                     <div class="card-body bg-light text-center">
-                        {% if user.is_authenticated %}
-                            <p class="text-success font-weight-bold">Welcome, <span
-                                    class="text-info text-capitalize">{{ user.username }}</span>. Thanks for logging in.
-                            </p>
-                        {% else %}
-                            <p class="text-success font-weight-bold">Welcome, New User. Please log in.</p>
-                        {% endif %}
                         <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ form.errors }}<br>
@@ -35,11 +28,11 @@
                             {{ form.phone }}<br><br>
                             <label for="{{ form.customer_image.6 }}">Image (optional):</label><br>
                             {{ form.customer_image }}<br><br>
-                            <button type="submit" class="btn btn-success">Register</button>
+                            <button type="submit" class="btn btn-success">Save Changes</button>
                         </form>
                     </div>
-                    <div class="card-footer">
-                        <a href="{% url 'home:landing_page' %}" class="btn btn-primary ml-5 w-75">exit</a>
+                    <div class="card-footer text-center">
+                        <a href="{% url 'customer:profile' %}" class="btn btn-primary w-50">exit</a>
                     </div>
                 </div>
             </div>
