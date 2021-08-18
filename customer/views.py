@@ -21,8 +21,8 @@ class ProfileView(LoginRequiredMixin, View):
     permission_required = 'auth.see_profile'
 
     def get(self, request, *args, **kwargs):
-        address = Customer.objects.get(user_ptr_id=self.request.user.id)
-        return render(request, 'customer/profile.html', {'address': address})
+        customer = Customer.objects.get(user_ptr_id=self.request.user.id)
+        return render(request, 'customer/profile.html', {'customer': customer})
 
 
 class Login(LoginView):
@@ -74,7 +74,7 @@ class AddressListApi(generics.ListAPIView, generics.CreateAPIView):
     queryset = Address.objects.all()
 
     def get_queryset(self):
-        return Address.objects.filter(owner__user_id=self.request.user.id)
+        return Address.objects.filter(owner=self.request.user)
 
 
 class AddressDetailApi(generics.RetrieveUpdateDestroyAPIView):
