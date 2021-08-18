@@ -22,8 +22,8 @@
                         <p><b class="text-primary font-weight-bold">Family:</b> {{ user.last_name }}</p>
                         <p><b class="text-primary font-weight-bold">Phone:</b> {{ user.customer.phone }}</p>
                         <p><b class="text-primary font-weight-bold">Email:</b> {{ user.email }}</p>
-                        {% if address.address_set.all %}
-                            {% for address in address.address_set.all %}
+                        {% if customer.address_set.all %}
+                            {% for address in customer.address_set.all %}
                                 <p><b class="text-primary font-weight-bold">Address-{{ forloop.counter }}:</b>
                                     {{ address.state }} -
                                     {{ address.city }} -
