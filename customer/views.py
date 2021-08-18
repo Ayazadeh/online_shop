@@ -53,16 +53,16 @@ class AddressView(CreateView):
         return super().form_valid(form)
 
 
-class UserListApi(generics.ListAPIView):
-    serializer_class = UserSerializer
+class CustomerListApi(generics.ListAPIView):
+    serializer_class = CustomerSerializer
     permission_classes = [
         IsSuperUser
     ]
     queryset = Customer.objects.all()
 
 
-class UserDetailApi(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = UserSerializer
+class CustomerDetailApi(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = CustomerSerializer
     queryset = Customer.objects.all()
     permission_classes = [
         UserDetailOwner

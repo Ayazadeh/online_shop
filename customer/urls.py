@@ -11,8 +11,8 @@ urlpatterns = [
     path('logout/', Logout.as_view(), name='logout'),
     path('address/', AddressView.as_view(), name='address'),
     path('change_password/', auth_views.PasswordChangeView.as_view(), name='change_password'),
-    path('user/all/api', UserListApi.as_view(), name='users_all_api'),
-    path('user/api/<int:pk>', UserDetailApi.as_view(), name='user_detail_api'),
+    path('user/all/api', CustomerListApi.as_view(), name='users_all_api'),
+    path('user/api/<int:pk>', CustomerDetailApi.as_view(), name='user_detail_api'),
     path('address/all/api/', AddressListApi.as_view(), name='address_all_api'),
     path('address/api/<int:pk>', AddressDetailApi.as_view(), name='address_detail_api')
 ]
