@@ -7,6 +7,9 @@ from product.models import Product
 
 
 class Order(TimestampMixin):
+    ref_code = models.CharField(max_length=15,
+                                verbose_name=_("reference code:"),
+                                help_text=_("add reference code for order"))
     owner = models.ForeignKey(Customer,
                               on_delete=models.SET_NULL,
                               null=True,
@@ -22,6 +25,7 @@ class Order(TimestampMixin):
 
     ordered_date = models.DateTimeField(auto_now=True)
 
+    # payment_details = models.ForeignKey(Payment, null=True)
     @classmethod
     def order_by_product_item(cls, id):
         return cls.objects.filter(product_item=id)
@@ -30,6 +34,12 @@ class Order(TimestampMixin):
     def total_price(product_id, count):
         price = Product.objects.get(id=product_id).final_price()
         return price * count
+
+    def get_cart_items(self):
+        return self.items.all()
+
+    def get_cart_total(self):
+        return sum([item.product.price for item in self.items.all()])
 
     def __str__(self):
         return self.status
