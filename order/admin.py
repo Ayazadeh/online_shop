@@ -2,18 +2,13 @@ from django.contrib import admin
 from order.models import *
 
 
-class OrderStatusAdmin(admin.ModelAdmin):
-    list_display = ['id', 'status']
-
-
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'customer']
+    list_display = ['id', 'owner']
 
 
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'ordered', 'product', 'quantity']
+    list_display = ['id', 'is_ordered', 'product', 'quantity']
 
 
-admin.site.register(OrderStatus, OrderStatusAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderItem, OrderItemAdmin)
