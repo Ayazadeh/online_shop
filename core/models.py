@@ -6,7 +6,7 @@ from django.utils import timezone
 class BaseManager(models.Manager):
 
     def get_queryset(self):
-        return super().get_queryset().filter(deleted=False)
+        return super().get_queryset().filter(is_deleted=False)
 
     def archive(self):
         return super().get_queryset()
@@ -16,8 +16,8 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
+    is_deleted = models.BooleanField(default=False)
     objects = BaseManager()
-    deleted = models.BooleanField(default=False)
 
 
 class TimestampMixin(BaseModel):
@@ -31,7 +31,7 @@ class TimestampMixin(BaseModel):
                                             blank=True, )
 
     def logical_delete(self):
-        self.deleted = True
+        self.is_deleted = True
         self.delete_timestamp = timezone.now()
         self.save()
 
