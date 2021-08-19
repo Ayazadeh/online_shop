@@ -6,31 +6,21 @@ from customer.models import Customer
 from product.models import Product
 
 
-class OrderStatus(models.Model):
-    status = models.CharField(max_length=30,
-                              verbose_name=_("status:"),
-                              help_text=_("add status for order's"),
-                              null=False,
-                              blank=False)
-
-    def __str__(self):
-        return f"{self.status}"
-
-
 class Order(TimestampMixin):
-    customer = models.ForeignKey(Customer,
-                                 on_delete=models.CASCADE,
-                                 verbose_name=_("customer:"),
-                                 help_text=_("choice customer"))
-    status = models.ForeignKey(OrderStatus,
-                               on_delete=models.CASCADE,
-                               verbose_name=_("status:"),
-                               help_text=_("choose status of order"))
+    owner = models.ForeignKey(Customer,
+                              on_delete=models.SET_NULL,
+                              null=True,
+                              verbose_name=_("owner:"),
+                              help_text=_("choice owner of order"))
+
+    status = models.CharField(max_length=150,
+                              verbose_name=_("status:"),
+                              help_text=_("add status for order"))
 
     items = models.ManyToManyField('OrderItem')
-    ordered = models.BooleanField(default=False)
+    is_ordered = models.BooleanField(default=False)
 
-    ordered_date = models.DateTimeField()
+    ordered_date = models.DateTimeField(auto_now=True)
 
     @classmethod
     def order_by_product_item(cls, id):
@@ -42,17 +32,17 @@ class Order(TimestampMixin):
         return price * count
 
     def __str__(self):
-        return self.status.status
+        return self.status
 
 
 class OrderItem(models.Model):
-    customer = models.ForeignKey(Customer,
-                                 on_delete=models.CASCADE)
+    is_ordered = models.BooleanField(default=False)
 
-    ordered = models.BooleanField(default=False)
-
-    product = models.ForeignKey(Product,
-                                on_delete=models.CASCADE)
+    product = models.OneToOneField(Product,
+                                   on_delete=models.SET_NULL,
+                                   null=True, )
+    date_added = models.DateTimeField(auto_now=True)
+    date_ordered = models.DateTimeField(null=True)
 
     def number_product_exist(self):
         if self.quantity > self.product.inventory:
