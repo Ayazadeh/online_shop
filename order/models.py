@@ -58,7 +58,7 @@ class OrderItem(models.Model):
         if self.quantity > self.product.inventory:
             raise ValidationError('inventory is not enough !!!')
 
-    quantity = models.PositiveIntegerField(default=1,
+    quantity = models.PositiveIntegerField(default=0,
                                            validators=[number_product_exist])
 
     def __str__(self):
