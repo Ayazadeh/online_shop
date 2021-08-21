@@ -31,7 +31,8 @@
                                 </p>
                             {% endif %}
                         <br>
-                        <a href="#" class="btn btn-outline-primary ml-5 w-75">add to cart</a>
+                        <a href="{% url 'order:add-to-cart' product.pk %}" class="btn btn-outline-primary ml-5 w-75">add
+                            to cart</a>
                     </div>
                 </div>
             </div>
