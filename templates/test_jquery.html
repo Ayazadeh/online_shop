@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<button id="demo" style=" width: 100px; height: 100px;">hello</button>
+<script>
+    $(document).ready(function () {
+        $("#demo").click(function (event) {
+            $(this).css("background-color", "ghostwhite").fadeToggle();
+        });
+    })
+</script>
+</body>
+</html>
