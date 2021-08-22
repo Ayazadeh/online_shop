@@ -131,14 +131,14 @@ class Product(TimestampMixin):
                                      validators=[validate_file_extension])
     promote = models.BooleanField(default=False)
 
+    def calculate_discount(self):
+        if self.discount.unit == 'percent':
+            return self.price * (self.discount.amount / 100)
+        elif self.discount.unit == 'rial':
+            return self.discount.amount
+
     def final_price(self):
-        price = self.price
-        final_price = 0
-        if self.discount.unit == 'rial':
-            final_price = price - self.discount.amount
-        elif self.discount.unit == 'percent':
-            final_price = price - (price * (self.discount.amount / 100))
-        return final_price
+        return self.price - self.calculate_discount()
 
     @classmethod
     def order_by_category(cls, id):
