@@ -31,7 +31,6 @@ class Order(TimestampMixin):
     @staticmethod
     def total_price(product_id, count):
         price = Product.objects.get(id=product_id).final_price()
-        print('total price:', price * count)
         return price * count
 
     def get_cart_items(self):
