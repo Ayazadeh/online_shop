@@ -14,9 +14,7 @@ from django import views
 class Cart(LoginRequiredMixin, views.View):
 
     def get(self, request, *args, **kwargs):
-
         order = Order.objects.filter(owner_id=request.user.id)
-        print(order)
         return render(request, 'order/cart.html', {'order': order})
 
 
