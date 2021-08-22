@@ -14,7 +14,9 @@ from django import views
 class Cart(LoginRequiredMixin, views.View):
 
     def get(self, request, *args, **kwargs):
+
         order = Order.objects.filter(owner_id=request.user.id)
+        print(order)
         return render(request, 'order/cart.html', {'order': order})
 
 
@@ -38,6 +40,60 @@ class OrderDetailApi(generics.RetrieveUpdateDestroyAPIView):
             order = order_query_set[0]
             return order.items.all()
 
+
+def add_to_cart(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    order_item, created = OrderItem.objects.get_or_create(
+        product=product,
+        is_ordered=False
+    )
+
+    order_query_set = Order.objects.filter(owner=request.user, is_ordered=False)
+    if order_query_set.exists():
+        order = order_query_set[0]
+
+        if order.items.filter(product_id=product.id).exists():
+            order_item.quantity += 1
+            order_item.save()
+            messages.info(request, "Added quantity Item")
+            return redirect("product:product_detail", pk=pk)
+        else:
+            order.items.add(order_item)
+            messages.info(request, "Item added to your cart")
+            return redirect("product:product_detail", pk=pk)
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(owner_id=request.user.id,
+                                     ordered_date=ordered_date,
+                                     )
+        order.items.add(order_item)
+        messages.info(request, "Item added to your cart")
+        return redirect('product:product_detail', pk=pk)
+
+
+def remove_from_cart(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    order_qs = Order.objects.filter(
+        owner_id=request.user.id,
+        is_ordered=False
+    )
+    if order_qs.exists():
+        order = order_qs[0]
+        if order.items.filter(product__pk=product.pk).exists():
+            order_item = OrderItem.objects.filter(
+                product=product,
+                is_ordered=False
+            )[0]
+            order_item.delete()
+            messages.info(request, "Item \"" + order_item.product.product_name + "\" remove from your cart")
+            return redirect("order:cart")
+        else:
+            messages.info(request, "This Item not in your cart")
+            return redirect("order:cart")
+    else:
+        # add message doesnt have order
+        messages.info(request, "You do not have an Order")
+        return redirect("order:cart", pk=pk)
 
 #
 # def add_to_cart(request, **kwargs):
@@ -69,59 +125,3 @@ class OrderDetailApi(generics.RetrieveUpdateDestroyAPIView):
 #         'order': existing_order
 #     }
 #     return render(request, 'order/cart.html', context)
-
-def add_to_cart(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    order_item, created = OrderItem.objects.get_or_create(
-        product=product,
-        is_ordered=False
-    )
-
-    order_query_set = Order.objects.filter(owner=request.user, is_ordered=False)
-    print('order_query_set:', order_query_set)
-    if order_query_set.exists():
-        order = order_query_set[0]
-
-        if order.items.filter(product_id=product.id).exists():
-            order_item.quantity += 1
-            order_item.save()
-            messages.info(request, "Added quantity Item")
-            return redirect("product:product_detail", pk=pk)
-        else:
-            order.items.add(order_item)
-            messages.info(request, "Item added to your cart")
-            return redirect("product:product_detail", pk=pk)
-    else:
-        ordered_date = timezone.now()
-        order = Order.objects.create(owner_id=request.user.id,
-                                     ordered_date=ordered_date,
-                                     )
-        order.items.add(order_item)
-        messages.info(request, "Item added to your cart")
-        return redirect('product:product_detail', pk=pk)
-#
-#
-# def remove_from_cart(request, pk):
-#     product = get_object_or_404(Product, pk=pk)
-#     order_qs = Order.objects.filter(
-#         user=request.user,
-#         ordered=False
-#     )
-#     if order_qs.exists():
-#         order = order_qs[0]
-#         if order.items.filter(product__pk=product.pk).exists():
-#             order_item = OrderItem.objects.filter(
-#                 product=product,
-#                 customer=request.user,
-#                 ordered=False
-#             )[0]
-#             order_item.delete()
-#             messages.info(request, "Item \"" + order_item.item.item_name + "\" remove from your cart")
-#             return redirect("core:product", pk=pk)
-#         else:
-#             messages.info(request, "This Item not in your cart")
-#             return redirect("core:product", pk=pk)
-#     else:
-#         # add message doesnt have order
-#         messages.info(request, "You do not have an Order")
-#         return redirect("core:product", pk=pk)
