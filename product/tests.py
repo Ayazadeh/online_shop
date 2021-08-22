@@ -59,5 +59,8 @@ class ProductTest(TestCase):
             inventory=2
         )
 
-    def test1_final_price(self):
+    def test1_calculate_discount(self):
+        self.assertEqual(self.product_1.calculate_discount(), 200000)
+
+    def test2_final_price(self):
         self.assertEqual(self.product_1.final_price(), 800000)
