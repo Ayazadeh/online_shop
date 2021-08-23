@@ -8,6 +8,8 @@
     <!-- mobile metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -21,9 +23,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- Responsive-->
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-    <!-- fevicon -->
-    <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/gif"/>
-    <!-- Scrollbar Custom CSS -->
+
     <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
@@ -59,8 +59,8 @@
                 <div class="head_top">
                     <div class="header">
                         <a href="{% url 'customer:profile' %}">
-                            <div class="float-right mt-2 bg-dark rounded p-2">
-                                <h1 class="text-info">
+                            <div class="float-right mt-2 bg-dark rounded p-2 shadow-sm">
+                                <h1 class="text-info ">
                                     {% if request.user.is_authenticated %}
                                         {{ request.user }}
                                     {% else %}
@@ -75,7 +75,7 @@
                                         <span class="badge badge-pill border-danger bg-danger text-light">
                                             1
                                         </span>
-                                    <i class="fa fa-shopping-cart display-4 text-secondary"></i>
+                                    <i class="fa fa-shopping-cart display-4 text-success"></i>
                                 </a>
                                 <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
 
