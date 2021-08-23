@@ -45,18 +45,20 @@ def add_to_cart(request, pk):
         product=product,
         is_ordered=False
     )
-
     order_query_set = Order.objects.filter(owner=request.user, is_ordered=False)
+
     if order_query_set.exists():
         order = order_query_set[0]
 
         if order.items.filter(product_id=product.id).exists():
             order_item.quantity += 1
+            request.session['qty'] = order_item.quantity
             order_item.save()
             messages.info(request, "Added quantity Item")
             return redirect("product:product_detail", pk=pk)
         else:
             order.items.add(order_item)
+            request.session['qty'] = order_item.quantity
             messages.info(request, "Item added to your cart")
             return redirect("product:product_detail", pk=pk)
     else:
@@ -70,6 +72,7 @@ def add_to_cart(request, pk):
 
 
 def remove_from_cart(request, pk):
+    request.session['qty'] = 0
     product = get_object_or_404(Product, pk=pk)
     order_qs = Order.objects.filter(
         owner_id=request.user.id,
@@ -92,34 +95,3 @@ def remove_from_cart(request, pk):
         # add message doesnt have order
         messages.info(request, "You do not have an Order")
         return redirect("order:cart", pk=pk)
-
-#
-# def add_to_cart(request, **kwargs):
-#     customer = get_object_or_404(Customer, user_ptr_id=request.user.id)
-#     product = Product.objects.filter(id=kwargs.get('pk', "")).first()
-#     print(product)
-#     print(kwargs.get('pk'))
-#     order_item, status = OrderItem.objects.get_or_create(product=product)
-#     customer_order, status = Order.objects.get_or_create(owner=customer, is_ordered=True)
-#     customer_order.items.add(order_item)
-#     if status:
-#         customer_order.save()
-#
-#     messages.info(request, "item added to cart")
-#     return redirect(reverse('product:product'))
-#
-#
-# def delete_from_cart(request, item_id):
-#     item_to_delete = OrderItem.objects.filter(pk=item_id)
-#     if item_to_delete.exists():
-#         item_to_delete[0].delete()
-#         messages.info(request, "Item has been deleted")
-#     return redirect(reverse('order:cart'))
-#
-#
-# def order_details(request, **kwargs):
-#     existing_order = get_user_pending_order(request)
-#     context = {
-#         'order': existing_order
-#     }
-#     return render(request, 'order/cart.html', context)

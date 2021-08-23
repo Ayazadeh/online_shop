@@ -53,6 +53,11 @@
 </head>
 <body>
 <div class="container-fluid">
+    <div class="text-success">
+        {% for msg in messages %}
+            {{ msg }}
+        {% endfor %}
+    </div>
     <div class="row">
         <div class="col">
             <header>
@@ -73,7 +78,7 @@
                             <div class="row">
                                 <a href="{% url 'order:cart' %}">
                                         <span class="badge badge-pill border-danger bg-danger text-light">
-                                            1
+                                            {{ request.session.qty }}
                                         </span>
                                     <i class="fa fa-shopping-cart display-4 text-success"></i>
                                 </a>
