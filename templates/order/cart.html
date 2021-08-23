@@ -1,71 +1,18 @@
 {% extends 'basehtml.html' %}
+{% load final_price %}
 {% block head %}
-    <style>
-        .cd-cart-trigger,
-        .cd-cart {
-            position: fixed;
-            bottom: 20px;
-            right: 5%;
-            transition: transform .2s;
-        }
-
-        .empty .cd-cart-trigger,
-        .empty .cd-cart {
-            /* hide cart */
-            transform: translateY(150px);
-        }
-
-        .cd-cart .wrapper {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            z-index: 2;
-            overflow: hidden;
-            height: 72px;
-            width: 72px;
-            border-radius: 6px;
-            transition: height .4s .1s, width .4s .1s, box-shadow .3s;
-            transition-timing-function: cubic-bezier(0.67, 0.17, 0.32, 0.95);
-            background: #ffffff;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.17);
-        }
-
-        .cart-open .cd-cart .wrapper {
-            height: 100%;
-            width: 100%;
-            transition-delay: 0s;
-        }
-
-        .cd-cart .body li.deleted {
-            /* this class is added to an item when it is removed form the cart */
-            position: absolute;
-            left: 1.4em;
-            width: calc(100% - 2.8em);
-            opacity: 0;
-            animation: cd-item-slide-out .3s forwards;
-        }
-
-        @keyframes cd-item-slide-out {
-            0% {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(80px);
-                opacity: 0;
-            }
-        }
-    </style>
 {% endblock %}
+
 {% block content %}
     <div class="container UpDown">
         <div class="row">
             <div class="col col-md-8 col-sm-10 col-lg-12">
-                <table class="table text-center shadow table-bordered UpDown">
+                <table class="table text-center shadow-sm table-bordered UpDown">
                     <thead class="thead-dark">
                     <tr>
                         <th>delete</th>
                         <th>quantity</th>
+                        <th>final price</th>
                         <th>discount</th>
                         <th>price</th>
                         <th>name</th>
@@ -75,94 +22,39 @@
                     {% for item in order %}
                         {% for order_item in item.items.all %}
                             <tr>
-                                <td>delete</td>
+                                <td>
+                                    <a href="{% url 'order:remove-from-cart' order_item.product.pk %}"
+                                       class="fa fa-trash-o text-danger"
+                                       style="font-size: 2rem"></a>
+                                </td>
+                                <td>{{ order_item.product.id | final_price:order_item.quantity }}</td>
                                 <td>{{ order_item.quantity }}</td>
                                 <td>{{ order_item.product.discount.amount }}
-                                        {% if order_item.product.discount.unit == 'percent' %}
-                                            % {% else %} {{ order_item.product.discount.unit }}{% endif %}</td>
+                                    {% if order_item.product.discount.unit == 'percent' %}
+                                        % {% else %} {{ order_item.product.discount.unit }}{% endif %}</td>
                                 <td>{{ order_item.product.price }}</td>
                                 <td>{{ order_item.product.product_name }}</td>
                                 <td class="w-25"><img src="{{ order_item.product.product_image.url }}" class="w-25">
                                 </td>
                             </tr>
                         {% endfor %}
+                        <div>
+                            <h1>
+                                {{ item.get_cart_total }}
+                            </h1>
+                        </div>
                     {% endfor %}
                 </table>
             </div>
         </div>
     </div>
-
-
-    {#    <div class="cd-cart cd-cart--empty js-cd-cart">#}
-    {#        <a href="#0" class="cd-cart__trigger text-replace">#}
-    {#            Cart#}
-    {#            <ul class="cd-cart__count"> <!-- cart items count -->#}
-    {#                <li>0</li>#}
-    {#                <li>0</li>#}
-    {#            </ul> <!-- .cd-cart__count -->#}
-    {#        </a>#}
+    {#    <script>#}
+    {#        $(document).ready(function () {#}
+    {#            $("#delete").on('click', function () {#}
+    {#                var id = $(this).attr('value');#}
+    {#                console.log(id)#}
     {##}
-    {#        <div class="cd-cart__content">#}
-    {#            <div class="cd-cart__layout">#}
-    {#                <header class="cd-cart__header">#}
-    {#                    <h2>Cart</h2>#}
-    {#                    <span class="cd-cart__undo">Item removed. <a href="#0">Undo</a></span>#}
-    {#                </header>#}
-    {##}
-    {#                <div class="cd-cart__body">#}
-    {#                    <ul>#}
-    {#                        <!-- products added to the cart will be inserted here using JavaScript -->#}
-    {#                    </ul>#}
-    {#                </div>#}
-    {##}
-    {#                <footer class="cd-cart__footer">#}
-    {#                    <a href="#0" class="cd-cart__checkout">#}
-    {#                        <em>Checkout - $<span>0</span>#}
-    {#                            <svg class="icon icon--sm" viewBox="0 0 24 24">#}
-    {#                                <g fill="none" stroke="currentColor">#}
-    {#                                    <line stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="3" y1="12"#}
-    {#                                          x2="21" y2="12"/>#}
-    {#                                    <polyline stroke-width="2" stroke-linecap="round" stroke-linejoin="round"#}
-    {#                                              points="15,6 21,12 15,18 "/>#}
-    {#                                </g>#}
-    {#                            </svg>#}
-    {#                        </em>#}
-    {#                    </a>#}
-    {#                </footer>#}
-    {#            </div>#}
-    {#        </div> <!-- .cd-cart__content -->#}
-    {#    </div> <!-- cd-cart -->#}
-    {##}
-    {#    <div class="body">#}
-    {#        <ul>#}
-    {#            <li class="product">#}
-    {#                <div class="product-image">#}
-    {#                    <a href="#0"><img src="img/thumb.jpg" alt="placeholder"></a>#}
-    {#                </div>#}
-    {##}
-    {#                <div class="product-details">#}
-    {#                    <h3><a href="#0">Product Name</a></h3>#}
-    {##}
-    {#                    <span class="price">$25.99</span>#}
-    {##}
-    {#                    <div class="actions">#}
-    {#                        <a href="#0" class="delete-item">Delete</a>#}
-    {##}
-    {#                        <div class="quantity">#}
-    {#                            <label for="cd-product-'+ productId +'">Qty</label>#}
-    {#                            <span class="select">#}
-    {#                     <select id="cd-product-'+ productId +'" name="quantity">#}
-    {#                        <option value="1">1</option>#}
-    {#                        <option value="2">2</option>#}
-    {#                         <!-- ... -->#}
-    {#                     </select>#}
-    {#                  </span>#}
-    {#                        </div>#}
-    {#                    </div>#}
-    {#                </div>#}
-    {#            </li>#}
-    {##}
-    {#            <!-- other products added to the cart -->#}
-    {#        </ul>#}
-    {#    </div>#}
+    {#            });#}
+    {#        });#}
+    {#    </script>#}
 {% endblock %}
