@@ -7,6 +7,11 @@
 {% block content %}
 
     <div class="container UpDown">
+        <div class="text-success">
+            {% for msg in messages %}
+                {{ msg }}
+            {% endfor %}
+        </div>
         <div class="row">
             <div class="col col-md-4 col-sm-6 d-flex">
                 <div class="card shadow w-100 bg-light">
@@ -31,12 +36,12 @@
                                 </p>
                             {% endif %}
                         <br>
-                        <a href="{% url 'order:add-to-cart' product.pk %}" class="btn btn-outline-primary ml-5 w-75">add
-                            to cart</a>
+                        <a href="{% url 'order:add-to-cart' product.pk %}" class="btn btn-outline-primary ml-5 w-75">
+                            add to cart
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
