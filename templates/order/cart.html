@@ -11,10 +11,10 @@
                     <thead class="thead-dark">
                     <tr>
                         <th>delete</th>
-                        <th>quantity</th>
                         <th>final price</th>
+                        <th>quantity</th>
                         <th>discount</th>
-                        <th>price</th>
+                        <th>price of one item</th>
                         <th>name</th>
                         <th>image</th>
                     </tr>
@@ -40,7 +40,8 @@
                         {% endfor %}
                         <div>
                             <h1>
-                                {{ item.get_cart_total }}
+                                <span class="text-success">Total price:</span>
+                                {{ item.get_cart_total | }}
                             </h1>
                         </div>
                     {% endfor %}
