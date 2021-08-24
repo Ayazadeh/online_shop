@@ -43,7 +43,7 @@ class RegisterView(CreateView):
 
 
 class AddressView(CreateView):
-    template_name = 'customer/profile.html'
+    template_name = 'customer/address.html'
     form_class = AddressForm
     success_url = reverse_lazy('customer:profile')
 
