@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from rest_framework import generics
 from django.views import View
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView, DetailView
 from customer.permissions import *
 from customer.serializers import *
 from customer.forms import *
@@ -17,6 +17,11 @@ class CustomerOrderView(ListView):
 
     def get_queryset(self):
         return Order.objects.filter(owner_id=self.request.user.id)
+
+
+class CustomerOrderDetailView(DetailView):
+    template_name = 'customer/customer_order_detail.html'
+    model = Order
 
 
 class CustomerEditView(LoginRequiredMixin, UpdateView):

@@ -1,0 +1,45 @@
+{% extends 'basehtml.html' %}
+{% load final_price %}
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <div class="container UpDown" id="container">
+        <div class="row">
+            <div class="col col-md-8 col-sm-10 col-lg-12">
+                <table class="table text-center shadow-sm table-bordered UpDown">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>final price</th>
+                        <th>quantity</th>
+                        <th>discount</th>
+                        <th>price of one item</th>
+                        <th>name</th>
+                        <th>image</th>
+                    </tr>
+                    </thead>
+                        {% for order_item in order.items.all %}
+                            <tr>
+                                <td>{{ order_item.product.id | final_price:order_item.quantity }}</td>
+                                <td>{{ order_item.quantity }}</td>
+                                <td>{{ order_item.product.discount.amount }}
+                                    {% if order_item.product.discount.unit == 'percent' %}
+                                        % {% else %} {{ order_item.product.discount.unit }}{% endif %}</td>
+                                <td>{{ order_item.product.price }}</td>
+                                <td>{{ order_item.product.product_name }}</td>
+                                <td class="w-25"><img src="{{ order_item.product.product_image.url }}" class="w-25">
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <div>
+                            <h1>
+                                <span class="text-success">Total price:</span>
+                                {{ order.get_cart_total }}
+                            </h1>
+                        </div>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

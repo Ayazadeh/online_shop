@@ -24,7 +24,7 @@
                             <td>{{ order.create_timestamp.time }}</td>
                             <td>{{ order.get_cart_total }}</td>
                             <td>{{ order.is_ordered}}</td>
-                            <td><a href="#" class="text-primary">detail</a></td>
+                            <td><a href="{% url 'customer:customer_order_detail' order.pk %}" class="text-primary">detail</a></td>
                         </tr>
                     {% endfor %}
                 </table>
