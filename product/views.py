@@ -1,15 +1,12 @@
-from django.http import JsonResponse
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import DetailView, ListView
-from rest_framework import generics, mixins
-from product.models import Product
+from rest_framework import generics
 from product.serializers import *
 
 
 class ProductView(ListView):
     model = Product
     template_name = "product/product.html"
+    queryset = Product.objects.order_by("-id")
 
 
 class ProductDetail(DetailView):
