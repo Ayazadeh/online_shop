@@ -8,43 +8,24 @@
         <div class="row">
             <div class="col col-md-8 col-sm-10 col-lg-12">
                 <table class="table text-center shadow-sm table-bordered UpDown">
-                    <thead class="thead-dark">
+                    <thead class="thead-light">
                     <tr>
-                        <th>delete</th>
-                        <th>final price</th>
-                        <th>quantity</th>
-                        <th>discount</th>
-                        <th>price of one item</th>
-                        <th>name</th>
-                        <th>image</th>
+                        <th>date</th>
+                        <th>time</th>
+                        <th>total price</th>
+                        <th>ordered</th>
+                        <th>Detail</th>
+
                     </tr>
                     </thead>
-                    {% for item in order %}
-                        {% for order_item in item.items.all %}
-                            <tr>
-                                <td>
-                                    <button id="delete" value="{{ order_item.product.pk }}" onclick="delete_item()"
-                                            class="fa fa-trash-o text-danger"
-                                            style="font-size: 2rem">
-                                    </button>
-                                </td>
-                                <td>{{ order_item.product.id | final_price:order_item.quantity }}</td>
-                                <td>{{ order_item.quantity }}</td>
-                                <td>{{ order_item.product.discount.amount }}
-                                    {% if order_item.product.discount.unit == 'percent' %}
-                                        % {% else %} {{ order_item.product.discount.unit }}{% endif %}</td>
-                                <td>{{ order_item.product.price }}</td>
-                                <td>{{ order_item.product.product_name }}</td>
-                                <td class="w-25"><img src="{{ order_item.product.product_image.url }}" class="w-25">
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        <div>
-                            <h1>
-                                <span class="text-success">Total price:</span>
-                                {{ item.get_cart_total }}
-                            </h1>
-                        </div>
+                    {% for order in order_list %}
+                        <tr>
+                            <td>{{ order.create_timestamp.date }}</td>
+                            <td>{{ order.create_timestamp.time }}</td>
+                            <td>{{ order.get_cart_total }}</td>
+                            <td>{{ order.is_ordered}}</td>
+                            <td><a href="#" class="text-primary">detail</a></td>
+                        </tr>
                     {% endfor %}
                 </table>
             </div>
