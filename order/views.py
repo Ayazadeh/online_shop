@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -40,6 +41,7 @@ class OrderDetailApi(generics.RetrieveUpdateDestroyAPIView):
             return order.items.all()
 
 
+@login_required
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, pk=pk)
     order_item, created = OrderItem.objects.get_or_create(
@@ -68,10 +70,12 @@ def add_to_cart(request, pk):
                                      ordered_date=ordered_date,
                                      )
         order.items.add(order_item)
+        request.session['qty'] = order_item.quantity
         messages.info(request, "Item added to your cart")
         return redirect('product:product_detail', pk=pk)
 
 
+@login_required
 def remove_from_cart(request, pk):
     request.session['qty'] = 0
     product = get_object_or_404(Product, pk=pk)
