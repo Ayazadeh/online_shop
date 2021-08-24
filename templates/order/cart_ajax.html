@@ -1,0 +1,44 @@
+{% load final_price %}
+<div class="row">
+    <div class="col col-md-8 col-sm-10 col-lg-12">
+        <table class="table text-center shadow-sm table-bordered UpDown">
+            <thead class="thead-dark">
+            <tr>
+                <th>delete</th>
+                <th>final price</th>
+                <th>quantity</th>
+                <th>discount</th>
+                <th>price of one item</th>
+                <th>name</th>
+                <th>image</th>
+            </tr>
+            </thead>
+            {% for item in order %}
+                {% for order_item in item.items.all %}
+                    <tr>
+                        <td>
+                            <button id="delete" value="{{ order_item.product.pk }}" onclick="delete_item()" class="fa fa-trash-o text-danger"
+                                    style="font-size: 2rem">
+                            </button>
+                        </td>
+                        <td>{{ order_item.product.id | final_price:order_item.quantity }}</td>
+                        <td>{{ order_item.quantity }}</td>
+                        <td>{{ order_item.product.discount.amount }}
+                            {% if order_item.product.discount.unit == 'percent' %}
+                                % {% else %} {{ order_item.product.discount.unit }}{% endif %}</td>
+                        <td>{{ order_item.product.price }}</td>
+                        <td>{{ order_item.product.product_name }}</td>
+                        <td class="w-25"><img src="{{ order_item.product.product_image.url }}" class="w-25">
+                        </td>
+                    </tr>
+                {% endfor %}
+                <div>
+                    <h1>
+                        <span class="text-success">Total price:</span>
+                        {{ item.get_cart_total }}
+                    </h1>
+                </div>
+            {% endfor %}
+        </table>
+    </div>
+</div>

@@ -1,14 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.utils import timezone
 from rest_framework import generics
 from order.permissions import *
 from order.serializers import *
-from customer.models import Customer
 from order.models import Order, OrderItem
 from product.models import Product
 from django import views
+from django.template.loader import render_to_string
 
 
 class Cart(LoginRequiredMixin, views.View):
@@ -86,8 +87,12 @@ def remove_from_cart(request, pk):
                 is_ordered=False
             )[0]
             order_item.delete()
+
+            order = Order.objects.filter(owner_id=request.user.id)
+            html = render_to_string('order/cart_ajax.html', context={'order': order})
+
             messages.info(request, "Item \"" + order_item.product.product_name + "\" remove from your cart")
-            return redirect("order:cart")
+            return JsonResponse({'html': html})
         else:
             messages.info(request, "This Item not in your cart")
             return redirect("order:cart")

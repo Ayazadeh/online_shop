@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container UpDown">
+    <div class="container UpDown" id="container">
         <div class="row">
             <div class="col col-md-8 col-sm-10 col-lg-12">
                 <table class="table text-center shadow-sm table-bordered UpDown">
@@ -23,9 +23,9 @@
                         {% for order_item in item.items.all %}
                             <tr>
                                 <td>
-                                    <a href="{% url 'order:remove-from-cart' order_item.product.pk %}"
-                                       class="fa fa-trash-o text-danger"
-                                       style="font-size: 2rem"></a>
+                                    <button id="delete" value="{{ order_item.product.pk }}" onclick="delete_item()" class="fa fa-trash-o text-danger"
+                                            style="font-size: 2rem">
+                                    </button>
                                 </td>
                                 <td>{{ order_item.product.id | final_price:order_item.quantity }}</td>
                                 <td>{{ order_item.quantity }}</td>
@@ -41,7 +41,7 @@
                         <div>
                             <h1>
                                 <span class="text-success">Total price:</span>
-                                {{ item.get_cart_total}}
+                                {{ item.get_cart_total }}
                             </h1>
                         </div>
                     {% endfor %}
@@ -49,13 +49,21 @@
             </div>
         </div>
     </div>
-    {#    <script>#}
-    {#        $(document).ready(function () {#}
-    {#            $("#delete").on('click', function () {#}
-    {#                var id = $(this).attr('value');#}
-    {#                console.log(id)#}
-    {##}
-    {#            });#}
-    {#        });#}
-    {#    </script>#}
+    <script>
+        function delete_item() {
+
+            var id = $('#delete').attr('value');
+            console.log(id);
+
+            $.ajax({
+                url: "http://127.0.0.1:8000/order/remove-from-cart/" + id,
+                type: "GET",
+                success: function (respone) {
+                    console.log(respone)
+                    $('#container').html(respone.html)
+                }
+            });
+
+        }
+    </script>
 {% endblock %}
