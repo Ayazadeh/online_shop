@@ -39,8 +39,8 @@
                         {{ item.get_cart_total }}
                     </h1>
                 </div>
+                <a href="{% url 'customer:buy' item.pk %}" class="btn btn-success float-right w-25">Buy</a>
             {% endfor %}
         </table>
-        <a href="#" class="btn btn-success float-right w-25">Buy</a>
     </div>
 </div>
