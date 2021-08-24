@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 
 app_name = 'customer'
 urlpatterns = [
+    path('order/', CustomerOrderView.as_view(), name='customer_order'),
     path('user_edit/<int:pk>', CustomerEditView.as_view(), name='user_edit'),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', Login.as_view(), name='my_login'),
