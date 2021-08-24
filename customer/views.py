@@ -10,7 +10,7 @@ from customer.serializers import *
 from customer.forms import *
 
 
-class UserChange(LoginRequiredMixin, UpdateView):
+class CustomerEditView(LoginRequiredMixin, UpdateView):
     template_name = 'customer/user_edit.html'
     success_url = reverse_lazy('customer:profile')
     form_class = NewUserChangeForm
@@ -43,7 +43,7 @@ class RegisterView(CreateView):
 
 
 class AddressView(CreateView):
-    template_name = 'customer/address.html'
+    template_name = 'customer/profile.html'
     form_class = AddressForm
     success_url = reverse_lazy('customer:profile')
 
