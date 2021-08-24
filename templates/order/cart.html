@@ -23,7 +23,8 @@
                         {% for order_item in item.items.all %}
                             <tr>
                                 <td>
-                                    <button id="delete" value="{{ order_item.product.pk }}" onclick="delete_item()" class="fa fa-trash-o text-danger"
+                                    <button id="delete" value="{{ order_item.product.pk }}" onclick="delete_item()"
+                                            class="fa fa-trash-o text-danger"
                                             style="font-size: 2rem">
                                     </button>
                                 </td>
@@ -46,6 +47,7 @@
                         </div>
                     {% endfor %}
                 </table>
+                <a href="#" class="btn btn-success float-right w-25">Buy</a>
             </div>
         </div>
     </div>
