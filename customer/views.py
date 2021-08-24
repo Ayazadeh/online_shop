@@ -16,7 +16,7 @@ class CustomerOrderView(ListView):
     model = Order
 
     def get_queryset(self):
-        return Order.objects.filter(owner_id=self.request.user.id)
+        return Order.objects.filter(owner_id=self.request.user.id, is_ordered=True)
 
 
 class CustomerOrderDetailView(DetailView):
