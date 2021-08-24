@@ -24,7 +24,8 @@
                         <p><b class="text-primary font-weight-bold">Email:</b> {{ user.email }}</p>
                         {% if customer.address_set.all %}
                             {% for address in customer.address_set.all %}
-                                <p><b class="text-primary font-weight-bold">Address-{{ forloop.counter }}:</b>
+                                <p><b class="text-primary font-weight-bold">Address-<span
+                                        class="text-dark">{{ forloop.counter }}</span>:</b>
                                     {{ address.state }} -
                                     {{ address.city }} -
                                     {{ address.plaque }} -
@@ -37,6 +38,7 @@
                     <div class="card-footer text-center">
                         <a href="{% url 'customer:address' %}" class="btn btn-secondary w-100">Address+</a>
                         <a href="{% url 'customer:user_edit' user.id %}" class="btn btn-secondary w-100 my-2">Edit</a>
+                        <a href="#" class="btn btn-secondary w-100">Order's</a>
                         <a href="{% url 'customer:logout' %}" class="btn btn-secondary w-100">Exit</a>
                     </div>
                 </div>
