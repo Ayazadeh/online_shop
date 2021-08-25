@@ -2,6 +2,7 @@ altgraph==0.17
 asgiref==3.4.1
 click==7.1.2
 Django==3.2.5
+djangorestframework==3.12.4
 future==0.18.2
 mysqlclient==2.0.3
 pefile==2019.4.18
