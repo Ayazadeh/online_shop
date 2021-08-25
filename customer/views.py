@@ -1,6 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from rest_framework import generics
@@ -10,20 +9,6 @@ from customer.permissions import *
 from customer.serializers import *
 from customer.forms import *
 from order.models import Order, OrderItem
-
-
-class BuyView(View):
-
-    def get(self, request, *args, **kwargs):
-        order = Order.objects.get(id=kwargs['pk'])
-        order.is_ordered = True
-        order.save()
-        request.session['qty'] = 0
-        for item in order.items.all():
-            item.date_ordered = timezone.now()
-            item.is_ordered = True
-            item.save()
-        return HttpResponse("your order save")
 
 
 class CustomerOrderView(ListView):
