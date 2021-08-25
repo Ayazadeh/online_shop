@@ -1,10 +1,10 @@
-{% load final_price %}
 <div class="row">
     <div class="col col-md-8 col-sm-10 col-lg-12">
         <table class="table text-center shadow-sm table-bordered UpDown">
             <thead class="thead-dark">
             <tr>
                 <th>delete</th>
+                <th>ordered</th>
                 <th>final price</th>
                 <th>quantity</th>
                 <th>discount</th>
@@ -13,8 +13,8 @@
                 <th>image</th>
             </tr>
             </thead>
-            {% for item in order %}
-                {% for order_item in item.items.all %}
+            {% if order %}
+                {% for order_item in order.items.all %}
                     <tr>
                         <td>
                             <button id="delete" value="{{ order_item.product.pk }}" onclick="delete_item()"
@@ -22,7 +22,8 @@
                                     style="font-size: 2rem">
                             </button>
                         </td>
-                        <td>{{ order_item.product.id | final_price:order_item.quantity }}</td>
+                        <td>{{ order_item.is_ordered }}</td>
+                        <td>{{ order_item.final_price }}</td>
                         <td>{{ order_item.quantity }}</td>
                         <td>{{ order_item.product.discount.amount }}
                             {% if order_item.product.discount.unit == 'percent' %}
@@ -33,14 +34,14 @@
                         </td>
                     </tr>
                 {% endfor %}
-                <div>
-                    <h1>
-                        <span class="text-success">Total price:</span>
-                        {{ item.get_cart_total }}
-                    </h1>
-                </div>
-                <a href="{% url 'customer:buy' item.pk %}" class="btn btn-success float-right w-25">Buy</a>
-            {% endfor %}
+            {% endif %}
         </table>
+        <div>
+            <h1>
+                <span class="text-success">Total price:</span>
+                {{ order.totol_price }}
+            </h1>
+        </div>
+        <button id="buy" onclick="buy()" value="{{ order.pk }}" class="btn btn-success float-right w-25">Buy</button>
     </div>
 </div>

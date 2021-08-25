@@ -1,5 +1,4 @@
 {% extends 'basehtml.html' %}
-{% load final_price %}
 {% block head %}
 {% endblock %}
 
@@ -11,6 +10,7 @@
                     <thead class="thead-dark">
                     <tr>
                         <th>delete</th>
+                        <th>ordered</th>
                         <th>final price</th>
                         <th>quantity</th>
                         <th>discount</th>
@@ -19,8 +19,8 @@
                         <th>image</th>
                     </tr>
                     </thead>
-                    {% for item in order %}
-                        {% for order_item in item.items.all %}
+                    {% if order %}
+                        {% for order_item in order.items.all %}
                             <tr>
                                 <td>
                                     <button id="delete" value="{{ order_item.product.pk }}" onclick="delete_item()"
@@ -28,7 +28,8 @@
                                             style="font-size: 2rem">
                                     </button>
                                 </td>
-                                <td>{{ order_item.product.id | final_price:order_item.quantity }}</td>
+                                <td>{{ order_item.is_ordered }}</td>
+                                <td>{{ order_item.final_price }}</td>
                                 <td>{{ order_item.quantity }}</td>
                                 <td>{{ order_item.product.discount.amount }}
                                     {% if order_item.product.discount.unit == 'percent' %}
@@ -39,15 +40,16 @@
                                 </td>
                             </tr>
                         {% endfor %}
-                        <div>
-                            <h1>
-                                <span class="text-success">Total price:</span>
-                                {{ item.get_cart_total }}
-                            </h1>
-                        </div>
-                        <a href="{% url 'customer:buy' item.pk %}" class="btn btn-success float-right w-25">Buy</a>
-                    {% endfor %}
+                    {% endif %}
                 </table>
+                <div>
+                    <h1>
+                        <span class="text-success">Total price:</span>
+                        {{ order.total_price }}
+                    </h1>
+                </div>
+                <button id="buy" onclick="buy()" value="{{ order.pk }}" class="btn btn-success float-right w-25">Buy
+                </button>
             </div>
         </div>
     </div>
@@ -66,6 +68,21 @@
                 }
             });
 
+        }
+    </script>
+    <script>
+        function buy() {
+            var id = $('#buy').attr('value');
+            console.log(id);
+
+            $.ajax({
+                url: "http://127.0.0.1:8000/order/buy/" + id,
+                type: "GET",
+                success: function (respone) {
+                    console.log(respone)
+                    $('#container').html(respone.html)
+                }
+            });
         }
     </script>
 {% endblock %}
