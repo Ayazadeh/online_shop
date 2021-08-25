@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.utils import timezone
+from django.views import View
 from rest_framework import generics
 from order.permissions import *
 from order.serializers import *
@@ -13,10 +14,28 @@ from django import views
 from django.template.loader import render_to_string
 
 
+class BuyView(View):
+
+    def get(self, request, *args, **kwargs):
+        order = Order.objects.get(id=kwargs['pk'])
+        order.is_ordered = True
+        order.save()
+        request.session['qty'] = 0
+        for item in order.items.all():
+            item.date_ordered = timezone.now()
+            item.is_ordered = True
+            item.save()
+        messages.info(request, "your order has been saved :)")
+
+        html = render_to_string('order/cart_ajax.html', context={'order': order})
+
+        return JsonResponse({'html': html})
+
+
 class Cart(LoginRequiredMixin, views.View):
 
     def get(self, request, *args, **kwargs):
-        order = Order.objects.filter(owner_id=request.user.id)
+        order = Order.objects.filter(owner=request.user).order_by("-id")[0]
         return render(request, 'order/cart.html', {'order': order})
 
 
@@ -45,9 +64,9 @@ class OrderDetailApi(generics.RetrieveUpdateDestroyAPIView):
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, pk=pk)
     order_item, created = OrderItem.objects.get_or_create(
-        product=product,
-        is_ordered=False
+        product_id=product.id,
     )
+
     order_query_set = Order.objects.filter(owner=request.user, is_ordered=False)
 
     if order_query_set.exists():
@@ -85,6 +104,7 @@ def remove_from_cart(request, pk):
     )
     if order_qs.exists():
         order = order_qs[0]
+
         if order.items.filter(product__pk=product.pk).exists():
             order_item = OrderItem.objects.filter(
                 product=product,
