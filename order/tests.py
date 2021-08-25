@@ -55,7 +55,10 @@ class Subtotal(TestCase):
         self.order.items.add(self.order_item_1, self.order_item_2)
 
     def test1_total_price(self):
-        self.assertEqual(self.order.total_price(self.order_item_1.id, self.order_item_1.quantity), 24000000)
+        self.assertEqual(self.order_item_1.final_price(), 24000000)
+
+    def test2_total_price(self):
+        self.assertEqual(self.order_item_2.final_price(), 4000000)
 
     def test2_get_cart_total(self):
-        self.assertEqual(self.order.get_cart_total(), 28000000)
+        self.assertEqual(self.order.total_price(), 28000000)
