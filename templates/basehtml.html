@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +70,7 @@
                                     {% if request.user.is_authenticated %}
                                         {{ request.user }}
                                     {% else %}
-                                        Please log in!
+                                        {% trans 'Please log in!' %}
                                     {% endif %}
                                 </h1>
                             </div>
@@ -96,16 +97,16 @@
                                             <ul class="navbar-nav">
                                                 <li class="nav-item">
                                                     <a class="nav-link text-muted" href="{% url 'home:landing_page' %}">
-                                                        Home </a>
+                                                        {% trans 'Home' %} </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link text-muted" href="{% url 'product:product' %}">Product</a>
+                                                    <a class="nav-link text-muted" href="{% url 'product:product' %}">{% trans 'Product' %}</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link text-muted" href="{% url 'product:category' %}">Categories</a>
+                                                    <a class="nav-link text-muted" href="{% url 'product:category' %}">{% trans 'Categories' %}</a>
                                                 </li>
                                             </ul>
-                                            <div class="sign_btn"><a href="{% url 'customer:my_login' %}">Sign in</a>
+                                            <div class="sign_btn"><a href="{% url 'customer:my_login' %}">{% trans 'Sign in' %}</a>
                                             </div>
                                         </div>
                                     </nav>
@@ -126,7 +127,7 @@
                         <div class="row">
                             <div class="col-md-6 text-center">
                                 <div class="cont_call">
-                                    <h3><strong class="multi"> Call Now</strong><br>
+                                    <h3><strong class="multi"> {% trans 'Call Now' %}</strong><br>
                                         (+98) 9038586843
                                     </h3>
                                 </div>

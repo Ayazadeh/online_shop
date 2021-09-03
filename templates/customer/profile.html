@@ -1,13 +1,15 @@
 {% extends 'basehtml.html' %}
 {% load static %}
-{% block title %} Profile {% endblock %}
+{% load i18n %}
+
+{% block title %} {% trans 'Profile' %} {% endblock %}
 {% block content %}
 
     <div class="container-fluid UpDown">
         {% if user.is_authenticated %}
-            <p class="text-success font-weight-bold">Welcome,
+            <p class="text-success font-weight-bold">{% trans 'Welcome,' %}
                 <span class="text-info text-capitalize">{{ user.username }}</span>.
-                Thanks for logging in.</p>
+                {% trans 'Thanks for logging in.' %}</p>
         {% endif %}
         <div class="row">
             <div class="col-11 col-sm-11 col-md-12 col-lg-4 col-xl-4">
@@ -17,14 +19,15 @@
                              src="{{ user.customer.customer_image.url }}" alt="Card image cap">
                     </div>
                     <div class="card-body">
-                        <p><b class="text-primary font-weight-bold">UserName:</b> {{ user.username }}</p>
-                        <p><b class="text-primary font-weight-bold">Name:</b> {{ user.first_name }}</p>
-                        <p><b class="text-primary font-weight-bold">Family:</b> {{ user.last_name }}</p>
-                        <p><b class="text-primary font-weight-bold">Phone:</b> {{ user.customer.phone }}</p>
-                        <p><b class="text-primary font-weight-bold">Email:</b> {{ user.email }}</p>
+                        <p><b class="text-primary font-weight-bold">{% trans 'UserName:' %}</b> {{ user.username }}</p>
+                        <p><b class="text-primary font-weight-bold">{% trans 'Name:' %}</b> {{ user.first_name }}</p>
+                        <p><b class="text-primary font-weight-bold">{% trans 'Family:' %}</b> {{ user.last_name }}</p>
+                        <p><b class="text-primary font-weight-bold">{% trans 'Phone:' %}</b> {{ user.customer.phone }}
+                        </p>
+                        <p><b class="text-primary font-weight-bold">{% trans 'Email:' %}</b> {{ user.email }}</p>
                         {% if customer.address_set.all %}
                             {% for address in customer.address_set.all %}
-                                <p><b class="text-primary font-weight-bold">Address-<span
+                                <p><b class="text-primary font-weight-bold">{% trans 'Address' %}-<span
                                         class="text-dark">{{ forloop.counter }}</span>:</b>
                                     {{ address.state }} -
                                     {{ address.city }} -
@@ -32,14 +35,18 @@
                                     {{ address.zip_code }}</p>
                             {% endfor %}
                         {% else %}
-                            <p><b>Address: <span class="text-danger">no address entered yet !!!</span></b></p>
+                            <p><b>{% trans 'Address:' %} <span
+                                    class="text-danger">{% trans 'no address entered yet !!!' %}</span></b>
+                            </p>
                         {% endif %}
                     </div>
                     <div class="card-footer text-center">
-                        <a href="{% url 'customer:address' %}" class="btn btn-secondary w-100">Address+</a>
-                        <a href="{% url 'customer:user_edit' user.id %}" class="btn btn-secondary w-100 my-2">Edit</a>
-                        <a href="{% url 'customer:customer_order' %}" class="btn btn-secondary mb-2 w-100">Order's</a>
-                        <a href="{% url 'customer:logout' %}" class="btn btn-secondary w-100">Exit</a>
+                        <a href="{% url 'customer:address' %}"
+                           class="btn btn-secondary w-100">{% trans 'Address' %}+</a>
+                        <a href="{% url 'customer:user_edit' user.id %}"
+                           class="btn btn-secondary w-100 my-2">{% trans 'Edit' %}</a>
+                        <a href="{% url 'customer:customer_order' %}" class="btn btn-secondary mb-2 w-100">{% trans 'Orders' %}</a>
+                        <a href="{% url 'customer:logout' %}" class="btn btn-secondary w-100">{% trans 'Exit' %}</a>
                     </div>
                 </div>
             </div>

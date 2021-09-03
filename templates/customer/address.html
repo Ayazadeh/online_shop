@@ -1,5 +1,7 @@
 {% extends 'basehtml.html' %}
-{% block title %}Add Address{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans 'Add Address' %}{% endblock %}
 {% block content %}
     <div class="container">
         <div class="row UpDown justify-content-center">
@@ -10,21 +12,21 @@
                             {% csrf_token %}
                             {{ form.errors }}<br>
 
-                            <label for="{{ form.state.1 }}">State:</label><br>
+                            <label for="{{ form.state.1 }}">{% trans 'State:' %}</label><br>
                             {{ form.state }}<br><br>
-                            <label for="{{ form.city.2 }}">City:</label><br>
+                            <label for="{{ form.city.2 }}">{% trans 'City:' %}</label><br>
                             {{ form.city }}<br><br>
-                            <label for="{{ form.zip_code.3 }}">Zip Code:</label><br>
+                            <label for="{{ form.zip_code.3 }}">{% trans 'Zip Code:' %}</label><br>
                             {{ form.zip_code }}<br><br>
-                            <label for="{{ form.plaque.4 }}">Plaque:</label><br>
+                            <label for="{{ form.plaque.4 }}">{% trans 'Plaque:' %}</label><br>
                             {{ form.plaque }}<br><br>
-                            <label for="{{ form.detail.5 }}">Detail:</label><br>
+                            <label for="{{ form.detail.5 }}">{% trans 'Detail:' %}</label><br>
                             {{ form.detail }}<br><br>
-                            <button type="submit" class="btn btn-success">save</button>
+                            <button type="submit" class="btn btn-success">{% trans 'save' %}</button>
                         </form>
                     </div>
                     <div class="card-footer text-center">
-                        <a href="{% url 'customer:profile' %}" class="btn btn-primary w-50">exit</a>
+                        <a href="{% url 'customer:profile' %}" class="btn btn-primary w-50">{% trans 'exit' %}</a>
                     </div>
                 </div>
             </div>

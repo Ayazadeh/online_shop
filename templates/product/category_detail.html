@@ -1,4 +1,5 @@
 {% extends 'basehtml.html' %}
+{% load i18n %}
 {% block title %}{{ object.category_name }} {% endblock %}
 
 {% block head %}
@@ -20,7 +21,8 @@
                         </div>
                         <div class="card-footer text-muted">
                             {{ product.price.price }}
-                            <a href="{% url 'product:product_detail' product.pk %}" class="btn btn-outline-primary ml-5 w-50">Detail & Buy</a>
+                            <a href="{% url 'product:product_detail' product.pk %}"
+                               class="btn btn-outline-primary ml-5 w-50">{% trans 'Detail & Buy' %}</a>
                         </div>
                     </div>
                 </div>

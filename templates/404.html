@@ -1,12 +1,13 @@
 {% extends 'basehtml.html' %}
+{% load i18n %}
 {% block head %}
     <style>
 
     </style>
 {% endblock %}
 {% block content %}
-<div class="my-5 py-5 text-center bg-light" style="height: 25rem;">
-    <h1 class="text-danger" style="font-size: 5rem"> ERROR 404</h1>
-    <h3 class="text-danger" style="font-size: 3rem">Page Not Found</h3>
-</div>
+    <div class="my-5 py-5 text-center bg-light" style="height: 25rem;">
+        <h1 class="text-danger" style="font-size: 5rem">{% trans 'ERROR 404' %}</h1>
+        <h3 class="text-danger" style="font-size: 3rem">{% trans 'Page Not Found' %}</h3>
+    </div>
 {% endblock %}

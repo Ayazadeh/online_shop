@@ -1,4 +1,6 @@
 {% extends 'basehtml.html' %}
+{% load i18n %}
+
 {% block head %}
 {% endblock %}
 
@@ -9,14 +11,14 @@
                 <table class="table text-center shadow-sm table-bordered UpDown">
                     <thead class="thead-dark">
                     <tr>
-                        <th>delete</th>
-                        <th>ordered</th>
-                        <th>final price</th>
-                        <th>quantity</th>
-                        <th>discount</th>
-                        <th>price of one item</th>
-                        <th>name</th>
-                        <th>image</th>
+                        <th>{% trans 'delete' %}</th>
+                        <th>{% trans 'ordered' %}</th>
+                        <th>{% trans 'final price' %}</th>
+                        <th>{% trans 'quantity' %}</th>
+                        <th>{% trans 'discount' %}</th>
+                        <th>{% trans 'price of one item' %}</th>
+                        <th>{% trans 'name' %}</th>
+                        <th>{% trans 'image' %}</th>
                     </tr>
                     </thead>
                     {% if order %}
@@ -44,11 +46,12 @@
                 </table>
                 <div>
                     <h1>
-                        <span class="text-success">Total price:</span>
+                        <span class="text-success">{% trans 'Total price:' %}</span>
                         {{ order.total_price }}
                     </h1>
                 </div>
-                <button id="buy" onclick="buy()" value="{{ order.pk }}" class="btn btn-success float-right w-25">Buy
+                <button id="buy" onclick="buy()" value="{{ order.pk }}"
+                        class="btn btn-success float-right w-25">{% trans 'Buy' %}
                 </button>
             </div>
         </div>

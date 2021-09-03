@@ -1,6 +1,7 @@
 {% extends 'basehtml.html' %}
+{% load i18n %}
 {% load static %}
-{% block title %} categories {% endblock %}
+{% block title %} {% trans 'categories' %} {% endblock %}
 {% block head %}
 
 {% endblock %}
@@ -19,7 +20,7 @@
                         </div>
                         <div class="card-footer text-muted">
                             {{ category.price.price }}
-                            <a href="{% url 'product:category_detail' category.pk %}" class="btn btn-primary ml-5 w-50">Detail</a>
+                            <a href="{% url 'product:category_detail' category.pk %}" class="btn btn-primary ml-5 w-50">{% trans 'Detail' %}</a>
                         </div>
                     </div>
                 </div>

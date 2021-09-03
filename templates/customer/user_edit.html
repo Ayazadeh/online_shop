@@ -1,6 +1,8 @@
 {% extends 'basehtml.html' %}
 {% load static %}
-{% block title %} Edit {{ user.username }} {% endblock %}
+{% load i18n %}
+
+{% block title %} {% trans 'Edit' %} {{ user.username }} {% endblock %}
 
 {% block content %}
 
@@ -14,25 +16,25 @@
                             {% csrf_token %}
                             {{ form.errors }}<br>
                             {{ form.username.errors }}<br>
-                            <label for="{{ form.username.1 }}">username:</label><br>
+                            <label for="{{ form.username.1 }}">{% trans 'username:' %}</label><br>
                             {{ form.username }}<br><br>
-                            <label for="{{ form.first_name.2 }}">first name:</label><br>
+                            <label for="{{ form.first_name.2 }}">{% trans 'first name:' %}</label><br>
                             {{ form.first_name }}<br><br>
-                            <label for="{{ form.last_name.3 }}">Family:</label><br>
+                            <label for="{{ form.last_name.3 }}">{% trans 'Family:' %}</label><br>
                             {{ form.last_name }}<br><br>
                             {{ form.email.errors }}
-                            <label for="{{ form.email.4 }}">Email:</label><br>
+                            <label for="{{ form.email.4 }}">{% trans 'Email:' %}</label><br>
                             {{ form.email }}<br><br>
                             {{ form.phone.errors }}
-                            <label for="{{ form.phone.5 }}">Phone:</label><br>
+                            <label for="{{ form.phone.5 }}">{% trans 'Phone:' %}</label><br>
                             {{ form.phone }}<br><br>
-                            <label for="{{ form.customer_image.6 }}">Image (optional):</label><br>
+                            <label for="{{ form.customer_image.6 }}">{% trans 'Image (optional):' %}</label><br>
                             {{ form.customer_image }}<br><br>
-                            <button type="submit" class="btn btn-success">Save Changes</button>
+                            <button type="submit" class="btn btn-success">{% trans 'Save Changes' %}</button>
                         </form>
                     </div>
                     <div class="card-footer text-center">
-                        <a href="{% url 'customer:profile' %}" class="btn btn-primary w-50">exit</a>
+                        <a href="{% url 'customer:profile' %}" class="btn btn-primary w-50">{% trans 'Exit' %}</a>
                     </div>
                 </div>
             </div>

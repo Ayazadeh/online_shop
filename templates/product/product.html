@@ -1,6 +1,7 @@
 {% extends 'basehtml.html' %}
 {% load static %}
-{% block title %} product's {% endblock %}
+{% load i18n %}
+{% block title %} {% trans 'products' %} {% endblock %}
 {% block head %}
 
 {% endblock %}
@@ -19,7 +20,7 @@
                             <p class="card-text">{{ product.brand.brand_name }}</p>
                         </div>
                         <div class="card-footer text-muted">
-                            <p class="text-primary"><b>Price:</b> {{ product.price }}
+                            <p class="text-primary"><b>{% trans 'Price:' %}</b> {{ product.price }}
                                 {% if product.discount.amount > 0 %}
                                     <b class="text-danger">
                                         {{ product.discount.amount }}{% if product.discount.unit == 'percent' %}
@@ -28,13 +29,13 @@
                                     </b>
                                     </p>
                                     <p class="text-success">
-                                        <b>Final Price:</b>
+                                        <b>{% trans 'Final Price:' %}</b>
                                         {{ product.final_price }}
                                     </p>
                                 {% endif %}
                             <br>
                             <a href="{% url 'product:product_detail' product.id %}"
-                               class="btn btn-outline-primary ml-5 w-75">Detail & Buy</a>
+                               class="btn btn-outline-primary ml-5 w-75">{% trans 'Detail & Buy' %}</a>
                         </div>
                     </div>
                 </div>
