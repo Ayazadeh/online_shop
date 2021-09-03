@@ -27,7 +27,7 @@ class CustomerOrderDetailView(DetailView):
 class CustomerEditView(LoginRequiredMixin, UpdateView):
     template_name = 'customer/user_edit.html'
     success_url = reverse_lazy('customer:profile')
-    form_class = NewUserChangeForm
+    form_class = UserUpdateForm
     model = Customer
 
 

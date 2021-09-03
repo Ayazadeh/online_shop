@@ -17,7 +17,7 @@ class RegisterForm(UserCreationForm):
                   'phone',
                   'password1',
                   'password2',
-                  'customer_image']
+                  'image']
 
         # widgets = {
         #     'username': forms.TextInput(attrs={'class': ' form-control'}),
@@ -36,7 +36,7 @@ class AddressForm(forms.ModelForm):
         exclude = ['owner']
 
 
-class NewUserChangeForm(UserChangeForm):
+class UserUpdateForm(UserChangeForm):
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional')
     last_name = forms.CharField(max_length=30, required=False, help_text='Optional')
     email = forms.EmailField(max_length=254, required=False, help_text='Enter a valid email address')
@@ -49,4 +49,4 @@ class NewUserChangeForm(UserChangeForm):
                   'last_name',
                   'email',
                   'phone',
-                  'customer_image']
+                  'image']
