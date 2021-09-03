@@ -126,10 +126,15 @@ class Product(TimestampMixin):
                                     blank=False)
 
     product_image = models.FileField(upload_to=product_image_path,
+                                     verbose_name=_("Image:"),
+                                     help_text=_("choose image for product"),
                                      null=False,
                                      blank=False,
                                      validators=[validate_file_extension])
-    promote = models.BooleanField(default=False)
+
+    promote = models.BooleanField(default=False,
+                                  verbose_name=_("promote:"),
+                                  help_text=_("choose True for slider!"))
 
     def calculate_discount(self):
         if self.discount.unit == 'percent':
