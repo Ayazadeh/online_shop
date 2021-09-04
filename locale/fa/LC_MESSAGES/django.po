@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-04 01:00+0430\n"
+"POT-Creation-Date: 2021-09-04 14:56+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -298,11 +298,11 @@ msgstr "برند:"
 msgid "add company"
 msgstr "شرکت را اضافه کنید"
 
-#: product/models.py:93 templates/basehtml.html:103 templates/index.html:80
+#: product/models.py:93 templates/index.html:80
 msgid "Product"
 msgstr "محصول"
 
-#: product/models.py:94 templates/index.html:151\
+#: product/models.py:94 templates/basehtml.html:103 templates/index.html:151
 msgid "Products"
 msgstr "محصولات"
 
@@ -378,7 +378,7 @@ msgstr "ادمین سایت جنگو"
 
 #: templates/basehtml.html:73
 msgid "Please log in!"
-msgstr "لطفا وارد حساب خود شوید!"
+msgstr "!لطفا وارد حساب خود شوید"
 
 #: templates/basehtml.html:100 templates/index.html:77
 msgid "Home"
@@ -392,7 +392,7 @@ msgstr "دسته ها"
 msgid "Sign in"
 msgstr "ورود"
 
-#: templates/basehtml.html:130 templates/index.html:370
+#: templates/basehtml.html:130 templates/index.html:373
 msgid "Call Now"
 msgstr "اکنون تماس بگیرید"
 
@@ -453,10 +453,10 @@ msgstr "تخفیف"
 msgid "price of one item"
 msgstr "قیمت یک قلم جنس"
 
-#: templates/customer/customer_order_detail.html:18
+#: templates/customer/customer_order_detail.html:18 templates/index.html:215
 #: templates/order/cart.html:20 templates/order/cart_ajax.html:14
 msgid "name"
-msgstr "نام:"
+msgstr "نام"
 
 #: templates/customer/customer_order_detail.html:19
 #: templates/order/cart.html:21 templates/order/cart_ajax.html:15
@@ -610,19 +610,31 @@ msgstr "بیشتر"
 msgid "Request a Call back"
 msgstr "درخواست تماس"
 
-#: templates/index.html:228
+#: templates/index.html:219
+msgid "Phone number"
+msgstr "شماره همراه"
+
+#: templates/index.html:223
+msgid "Email"
+msgstr "ایمیل"
+
+#: templates/index.html:227 templates/index.html:228
+msgid "Message"
+msgstr "پیام"
+
+#: templates/index.html:231
 msgid "Send"
 msgstr "فرستادن"
 
-#: templates/index.html:256
+#: templates/index.html:259
 msgid "offer everyday"
 msgstr "تخفیف روزانه"
 
-#: templates/index.html:351
+#: templates/index.html:354
 msgid "Previous"
 msgstr "قبلی"
 
-#: templates/index.html:355
+#: templates/index.html:358
 msgid "Next"
 msgstr "بعدی"
 

@@ -1,5 +1,5 @@
-{% load static %}
 {% load i18n %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -212,17 +212,20 @@
                             <form class="main_form">
                                 <div class="row">
                                     <div class="col-md-12 ">
-                                        <input class="contactus" placeholder="Nmae" type="text" name="Nmae">
+                                        <input class="contactus" placeholder="{% trans 'name' %}" type="text"
+                                               name="Nmae">
                                     </div>
                                     <div class="col-md-12">
-                                        <input class="contactus" placeholder="Phone number" type="text"
+                                        <input class="contactus" placeholder="{% trans 'Phone number' %}" type="text"
                                                name=" Phone number">
                                     </div>
                                     <div class="col-md-12">
-                                        <input class="contactus" placeholder="Email" type="text" name="Email">
+                                        <input class="contactus" placeholder="{% trans 'Email' %}" type="text"
+                                               name="Email">
                                     </div>
                                     <div class="col-md-12">
-                                        <textarea class="textarea" placeholder="Message" type="text" name="Message "> Message </textarea>
+                                        <textarea class="textarea" placeholder="{% trans 'Message' %}" type="text"
+                                                  name="Message">{% trans 'Message' %}</textarea>
                                     </div>
                                     <div class="col-sm-12">
                                         <button class="send_btn">{% trans 'Send' %}</button>
@@ -253,7 +256,7 @@
             </div>
             <div class="col-md-6">
                 <div class="two_box_img">
-                    <h2><span class="offer">15% </span>{% trans '0ffer everyday' %}</h2>
+                    <h2><span class="offer">15% </span>{% trans 'offer everyday' %}</h2>
                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered
                         alteration in some form, by injected humour, or randomised words which don't look even slightly
                         believable</p>
