@@ -2,7 +2,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head >
     {% comment "in django" %}
         <p> just for remember</p>
     {% endcomment %}
@@ -143,7 +143,7 @@
 </div>
 <!-- about -->
 <!-- best -->
-<div id="product" class="best">
+<div id="product" class="best  bg-light">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -156,7 +156,7 @@
             {% for product in object_list %}
                 {#                {% if forloop.counter <= 8 %}#}
                 <div class="col-md-4 col-sm-6 col-xl-3 d-flex">
-                    <div class="card shadow w-100 mt-5">
+                    <div class="card shadow w-100 mt-5 ">
                         <img class="card-img-top" src="{{ product.product_image.url }}" alt="Card image cap">
                         <div class="card-body ">
                             <h5 class="card-title">{{ product.product_name }}</h5>
