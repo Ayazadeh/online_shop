@@ -1,7 +1,10 @@
 from django.urls import path
-from home.views import *
+from django.views.generic import ListView
+
+from product.models import Product
 
 app_name = 'home'
 urlpatterns = [
-    path('', LandingPage.as_view(), name='landing_page')
+    path('', ListView.as_view(template_name='index.html', queryset=Product.objects.all()[:8]),
+         name='landing_page')
 ]
