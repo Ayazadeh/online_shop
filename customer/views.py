@@ -40,10 +40,7 @@ class ProfileView(LoginRequiredMixin, View):
 
 
 class Login(LoginView):
-    """
-    template name default is registration/login.html
-    """
-    pass
+    template_name = 'customer/login.html'
 
 
 class Logout(LogoutView):
