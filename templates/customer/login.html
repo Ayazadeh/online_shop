@@ -13,7 +13,7 @@
 
     <div class="container UpDown">
         <div class="row justify-content-center">
-            <div class="col col-md-4 col-sm-6 col-xl-3">
+            <div class="col col-md-4 col-sm-6 col-xl-4">
                 <div class="card shadow bg-light">
                     <img class="card-img-top" src="{% static 'images/login.png' %}" alt="Card image cap">
                     <div class="card-body">
@@ -32,9 +32,9 @@
                         </form>
                     </div>
                     <div class="card-footer shadow">
-                        <a href="{% url 'customer:change_password' %}" class="w-25">{% trans 'Forgot Password?' %}</a>
+                        <a href="{% url 'customer:change_password' %}">{% trans 'Forgot Password?' %}</a>
                         <a href="{% url 'customer:register' %}"
-                           class="btn btn-primary ml-2 w-50">{% trans 'Register' %}</a>
+                           class="btn btn-primary ml-2 w-auto">{% trans 'Register' %}</a>
                     </div>
                 </div>
             </div>
