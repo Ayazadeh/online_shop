@@ -83,7 +83,7 @@
                                         <a class="nav-link text-muted" href="#about">{% trans 'About us' %}</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-muted" href="#contact">{% trans 'Contact us' %}</a>
+                                        <a class="nav-link text-muted" href="#contact_us">{% trans 'Contact us' %}</a>
                                     </li>
                                 </ul>
                                 <div class="sign_btn"><a href="{% url 'customer:my_login' %}">{% trans 'Sign in' %}</a>
@@ -193,7 +193,7 @@
 </div>
 <!-- end best -->
 <!-- request -->
-<div id="contact" class="request">
+<div id="contact_us" class="request">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -209,7 +209,8 @@
                 <div class="black_bg">
                     <div class="row">
                         <div class="col-md-7 ">
-                            <form class="main_form">
+                            <form class="main_form" action="{% url 'contact_us:contact_us' %}" method="POST">
+                                {% csrf_token %}
                                 <div class="row">
                                     <div class="col-md-12 ">
                                         <input class="contactus" placeholder="{% trans 'name' %}" type="text"
@@ -217,15 +218,15 @@
                                     </div>
                                     <div class="col-md-12">
                                         <input class="contactus" placeholder="{% trans 'Phone number' %}" type="text"
-                                               name=" Phone number">
+                                               name="phone_number">
                                     </div>
                                     <div class="col-md-12">
                                         <input class="contactus" placeholder="{% trans 'Email' %}" type="text"
-                                               name="Email">
+                                               name="email">
                                     </div>
                                     <div class="col-md-12">
                                         <textarea class="textarea" placeholder="{% trans 'Message' %}" type="text"
-                                                  name="Message">{% trans 'Message' %}</textarea>
+                                                  name="message">{% trans 'Message' %}</textarea>
                                     </div>
                                     <div class="col-sm-12">
                                         <button class="send_btn">{% trans 'Send' %}</button>
