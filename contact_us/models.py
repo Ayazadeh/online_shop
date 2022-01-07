@@ -4,7 +4,8 @@ from django.utils.translation import gettext_lazy as _
 
 class ContactUs(TimestampMixin):
     class Meta:
-        verbose_name = _("Contact Us:")
+        verbose_name = _("Contact Us")
+        verbose_name_plural = _("Contact Us")
 
     name = models.CharField(max_length=50,
                             verbose_name=_('Name:'),
